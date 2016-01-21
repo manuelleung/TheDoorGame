@@ -3,7 +3,8 @@ package org.thedoorgame.doorgame.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import org.thedoorgame.doorgame.Game;
+
+import org.thedoorgame.doorgame.DoorGame;
 
 public class HtmlLauncher extends GwtApplication {
 
@@ -14,6 +15,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener getApplicationListener () {
-                return new Game();
+                return new DoorGame();
         }
 }
