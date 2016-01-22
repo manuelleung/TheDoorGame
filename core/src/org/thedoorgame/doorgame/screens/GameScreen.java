@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import org.thedoorgame.doorgame.DoorGame;
+import org.thedoorgame.doorgame.Objects.Door;
 
 /**
  * Created by Manuel on 1/21/2016.
@@ -51,7 +52,8 @@ public class GameScreen implements Screen {
         drawGrid(); // ADDED by LEIBNIZ
 
         doorGame.batch.begin();
-        doorGame.font.draw(doorGame.batch, "GAME SCREEN!!", (width/2)-50, (height/2) );
+        doorGame.font.draw(doorGame.batch, "GAME SCREEN!!", (width / 2) - 50, (height / 2));
+
         doorGame.batch.end();
     }
 
