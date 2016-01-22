@@ -26,10 +26,6 @@ public class GameScreen implements Screen {
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, width, height);
-
-
     }
 
     @Override
@@ -46,12 +42,6 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // tell the camera to update its matrices.
-        camera.update();
-        // tell the SpriteBatch to render in the
-        // coordinate system specified by the camera.
-        doorGame.batch.setProjectionMatrix(camera.combined);
-
         doorGame.batch.begin();
         doorGame.font.draw(doorGame.batch, "GAME SCREEN!!", (width/2)-50, (height/2) );
         doorGame.batch.end();
@@ -59,26 +49,22 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
+        dispose();
     }
 
     @Override
     public void dispose() {
-
     }
 }

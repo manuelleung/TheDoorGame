@@ -68,15 +68,15 @@ public class MainMenuScreen implements Screen {
 
         // create table
         table = new Table(skin);
-        table.setBounds(0, 0, width, height);
+        table.setFillParent(true);
+        //table.setBounds(0, 0, width, height);
 
         // Creating heading
         heading = new Label(DoorGame.TITLE, skin);
         heading.setFontScale(2);
 
 
-        // DO THIS!
-        // change handlers to switches in a method
+        // TODO change handlers to switches in a method
 
         //play
         buttonPlay = new TextButton("PLAY", skin);
@@ -93,7 +93,7 @@ public class MainMenuScreen implements Screen {
         buttonScore.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //go to score screen
+                doorGame.setScreen(new ScoreScreen(doorGame));
             }
         });
         buttonScore.pad(15);
@@ -103,12 +103,12 @@ public class MainMenuScreen implements Screen {
         buttonSetting.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // go to settings
+                doorGame.setScreen(new SettingScreen(doorGame));
             }
         });
         buttonSetting.pad(15);
 
-        //exit Remove this later not necessary
+        // TODO exit Remove this later not necessary
         buttonExit = new TextButton("Exit", skin);
         buttonExit.addListener(new ClickListener() {
             @Override
@@ -141,6 +141,7 @@ public class MainMenuScreen implements Screen {
     @Override
     public void hide() {
         // called when current screen changes from this to a different screen
+        dispose();
     }
 
 
