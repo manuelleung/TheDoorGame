@@ -1,21 +1,26 @@
-package org.thedoorgame.doorgame;
+package org.thedoorgame.doorgame.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
-public class MainMenuScreen implements Screen {
+import org.thedoorgame.doorgame.DoorGame;
 
+/**
+ * Created by Manuel on 1/21/2016.
+ */
+public class GameScreen implements Screen {
 
     final DoorGame doorGame;
 
+
     OrthographicCamera camera;
+
 
     private int width, height;
 
-    // constructor to keep a reference to the main DoorGame class
-    public MainMenuScreen(DoorGame doorGame){
+    public GameScreen(DoorGame doorGame) {
         this.doorGame = doorGame;
 
         width = Gdx.graphics.getWidth();
@@ -24,59 +29,56 @@ public class MainMenuScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, width, height);
 
+
+    }
+
+    @Override
+    public void show() {
+
     }
 
     @Override
     public void render(float delta) {
+        // clear the screen with a dark blue color. The
+        // arguments to glClearColor are the red, green
+        // blue and alpha component in the range [0,1]
+        // of the color to be used to clear the screen.
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // tell the camera to update its matrices.
         camera.update();
+        // tell the SpriteBatch to render in the
+        // coordinate system specified by the camera.
         doorGame.batch.setProjectionMatrix(camera.combined);
 
-
         doorGame.batch.begin();
-        doorGame.font.draw(doorGame.batch, "Welcome to Door Game!!", (width/2)-50, (height/2) );
-        doorGame.font.draw(doorGame.batch, "Tap anywhere to begin!", (width/2)-50, (height/2)-50 );
+        doorGame.font.draw(doorGame.batch, "GAME SCREEN!!", (width/2)-50, (height/2) );
         doorGame.batch.end();
-
-        // update and draw stuff
-        if (Gdx.input.isTouched()) { // use your own criterion here
-            doorGame.setScreen(new GameScreen(doorGame));
-            dispose();
-        }
     }
-
 
     @Override
     public void resize(int width, int height) {
+
     }
-
-
-    @Override
-    public void show() {
-        // called when this screen is set as the screen with doorGame.setScreen();
-    }
-
-
-    @Override
-    public void hide() {
-        // called when current screen changes from this to a different screen
-    }
-
 
     @Override
     public void pause() {
-    }
 
+    }
 
     @Override
     public void resume() {
+
     }
 
+    @Override
+    public void hide() {
+
+    }
 
     @Override
     public void dispose() {
-        // never called automatically
+
     }
 }
