@@ -5,9 +5,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import org.thedoorgame.doorgame.DoorGame;
 import org.thedoorgame.doorgame.Objects.Door;
+import org.thedoorgame.doorgame.Objects.FloorCreator;
 
 /**
  * Created by Manuel on 1/21/2016.
@@ -15,6 +17,7 @@ import org.thedoorgame.doorgame.Objects.Door;
 public class GameScreen implements Screen {
 
     final DoorGame doorGame;
+    Stage stage;
 
 
     OrthographicCamera camera;
@@ -38,6 +41,8 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         shapeRenderer = new ShapeRenderer(); // ADDED BY LEIBNIZ for design purposes
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -50,11 +55,34 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         drawGrid(); // ADDED by LEIBNIZ
+        stage.act(delta);
+        stage.draw();
 
-        doorGame.batch.begin();
-        doorGame.font.draw(doorGame.batch, "GAME SCREEN!!", (width / 2) - 50, (height / 2));
 
-        doorGame.batch.end();
+        //-------------- Creating two floors example --------------//
+                                                                   //
+        // Initialize two floors:                                  //
+        FloorCreator floor1 = new FloorCreator(stage);             //
+        FloorCreator floor2 = new FloorCreator(stage);             //
+                                                                   //
+        // Create floors                                           //        WARNING:
+        floor1.createFloor();                                      //  You must call the createFloor()
+        floor2.createFloor();                                      //  method first, before you
+                                                                   //  relocate them.
+                                                                   //
+        // relocate floors                                         //
+        floor1.setLocation(150,0);                                 //
+        floor2.setLocation(150,500);                               //
+                                                                   //
+        // floor1.increaseHeightBy(200);                           //
+                                                                   //
+        //----------------- Done ----------------------------------//
+
+
+
+//        doorGame.batch.begin();
+//        doorGame.font.draw(doorGame.batch, "GAME SCREEN!!", (width / 2) - 50, (height / 2));
+//        doorGame.batch.end();
     }
 
     @Override
