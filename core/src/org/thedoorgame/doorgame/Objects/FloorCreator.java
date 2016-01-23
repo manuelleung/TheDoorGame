@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  * Created by Leibniz H. Berihuete on 1/22/2016.
  */
 public class FloorCreator {
-    private static final int NUMBER_OF_DOORS = 5;
+    public static final int NUMBER_OF_DOORS = 5;
     private static final float DISTANCE_BETWEEN_DOORS = 200;
     private  Door [] doors = new Door[NUMBER_OF_DOORS];
 

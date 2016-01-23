@@ -5,7 +5,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import org.thedoorgame.doorgame.DoorGame;
 import org.thedoorgame.doorgame.Objects.Door;
@@ -43,6 +46,118 @@ public class GameScreen implements Screen {
         shapeRenderer = new ShapeRenderer(); // ADDED BY LEIBNIZ for design purposes
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
+
+        //-------------- EXAMPLE: how to create floors-------------//
+                                                                   //
+        // Initialize two floors:                                  //
+        final FloorCreator floor1 = new FloorCreator(stage);       //
+        final FloorCreator floor2 = new FloorCreator(stage);       //
+                                                                   //
+        // Create floors                                           //        WARNING:
+        floor1.createFloor();                                      //  You must call the createFloor()
+        floor2.createFloor();                                      //  method first, before you
+                                                                   //  relocate them.
+                                                                   //
+        // relocate them anywhere you want                         //
+        floor1.setLocation(150,0);                                 //
+        floor2.setLocation(150,500);                               //
+                                                                   //
+        //----------------- Done ----------------------------------//
+
+
+
+        //---- EXAMPLE: how to access a door from a Floor----------//
+                                                                   //
+        Door firstDoor = floor1.getDoor(0);                         //   the first door of any floor
+        Door secondDoor = floor1.getDoor(1);                       //    is alway zero
+                                                                   //
+        //--etc----------------------------------------------------//
+
+
+
+/* *****************************
+        1st FLOOR
+ * ****************************/
+        floor1.getDoor(0).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                floor1.getDoor(0).play();
+            }
+        });
+
+        floor1.getDoor(1).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                floor1.getDoor(1).play();
+            }
+        });
+
+        floor1.getDoor(2).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                floor1.getDoor(2).play();
+            }
+        });
+
+        floor1.getDoor(3).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                floor1.getDoor(3).play();
+            }
+        });
+
+        floor1.getDoor(4).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                floor1.getDoor(4).play();
+            }
+        });
+
+/* *****************************
+        2nd FLOOR
+ * ****************************/
+        floor2.getDoor(0).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                floor2.getDoor(0).play();
+            }
+        });
+
+        floor2.getDoor(1).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                floor2.getDoor(1).play();
+            }
+        });
+
+        floor2.getDoor(2).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                floor2.getDoor(2).play();
+            }
+        });
+
+        floor2.getDoor(3).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                floor2.getDoor(3).play();
+            }
+        });
+
+        floor2.getDoor(4).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                floor2.getDoor(4).play();
+            }
+        });
+
+
+
+
+
+
+
+        //--------------------------------------------------------------//
     }
 
     @Override
@@ -59,24 +174,13 @@ public class GameScreen implements Screen {
         stage.draw();
 
 
-        //-------------- Creating two floors example --------------//
-                                                                   //
-        // Initialize two floors:                                  //
-        FloorCreator floor1 = new FloorCreator(stage);             //
-        FloorCreator floor2 = new FloorCreator(stage);             //
-                                                                   //
-        // Create floors                                           //        WARNING:
-        floor1.createFloor();                                      //  You must call the createFloor()
-        floor2.createFloor();                                      //  method first, before you
-                                                                   //  relocate them.
-                                                                   //
-        // relocate floors                                         //
-        floor1.setLocation(150,0);                                 //
-        floor2.setLocation(150,500);                               //
-                                                                   //
-        // floor1.increaseHeightBy(200);                           //
-                                                                   //
-        //----------------- Done ----------------------------------//
+
+
+
+
+
+
+
 
 
 

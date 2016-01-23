@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+
 
 /**
  * Created by Leibniz H. Berihuete on 1/22/2016.
@@ -18,6 +20,9 @@ public class Door extends Actor {
             new Texture(Gdx.files.internal("blue_door2.png")),       //
             new Texture(Gdx.files.internal("blue_door3.png")),       //
             new Texture(Gdx.files.internal("blue_door4.png")),       //
+            new Texture(Gdx.files.internal("blue_door3.png")),       //
+            new Texture(Gdx.files.internal("blue_door2.png")),       //
+            new Texture(Gdx.files.internal("blue_door1.png")),       //
     };                                                               //
                                                                      //
     private static final Texture [] GREEN_DOOR_TEXTURE = {           //
@@ -26,6 +31,9 @@ public class Door extends Actor {
             new Texture(Gdx.files.internal("green_door2.png")),      //
             new Texture(Gdx.files.internal("green_door3.png")),      //
             new Texture(Gdx.files.internal("green_door4.png")),      //
+            new Texture(Gdx.files.internal("green_door3.png")),      //
+            new Texture(Gdx.files.internal("green_door2.png")),      //
+            new Texture(Gdx.files.internal("green_door1.png")),      //
     };                                                               //
                                                                      //
     private static final Texture [] GRAY_DOOR_TEXTURE = {            //
@@ -34,6 +42,9 @@ public class Door extends Actor {
             new Texture(Gdx.files.internal("gray_door2.png")),       //
             new Texture(Gdx.files.internal("gray_door3.png")),       //
             new Texture(Gdx.files.internal("gray_door4.png")),       //
+            new Texture(Gdx.files.internal("gray_door3.png")),       //
+            new Texture(Gdx.files.internal("gray_door2.png")),       //
+            new Texture(Gdx.files.internal("gray_door1.png")),       //
     };                                                               //
                                                                      //
     private static final Texture [] ORANGE_DOOR_TEXTURE = {          //
@@ -42,6 +53,9 @@ public class Door extends Actor {
             new Texture(Gdx.files.internal("orange_door2.png")),     //
             new Texture(Gdx.files.internal("orange_door3.png")),     //
             new Texture(Gdx.files.internal("orange_door4.png")),     //
+            new Texture(Gdx.files.internal("orange_door3.png")),     //
+            new Texture(Gdx.files.internal("orange_door2.png")),     //
+            new Texture(Gdx.files.internal("orange_door1.png")),     //
     };                                                               //
                                                                      //
     private static final Texture [] YELLOW_DOOR_TEXTURE = {          //
@@ -50,6 +64,9 @@ public class Door extends Actor {
             new Texture(Gdx.files.internal("yellow_door2.png")),     //
             new Texture(Gdx.files.internal("yellow_door3.png")),     //
             new Texture(Gdx.files.internal("yellow_door4.png")),     //
+            new Texture(Gdx.files.internal("yellow_door3.png")),     //
+            new Texture(Gdx.files.internal("yellow_door2.png")),     //
+            new Texture(Gdx.files.internal("yellow_door1.png")),     //
     };                                                               //
 //-------------------------------------------------------------------//
 
@@ -129,7 +146,7 @@ public Door (int doorColor, float xLocation, float yLocation) {
         setUpDoorColor(doorColor);
         setLocation(xLocation, yLocation);
         resize(currentTexture.getWidth(),
-               currentTexture.getHeight());
+                currentTexture.getHeight());
     }
 
 
@@ -152,7 +169,8 @@ public Door (int doorColor, float xLocation, float yLocation) {
 
 
         }
-       batch.draw(currentTexture, locationX, locationY,width,height);
+        batch.draw(currentTexture, locationX, locationY,width,height);
+        this.setBounds(locationX,locationY,width,height);
     }
 
 
@@ -291,6 +309,11 @@ public Door (int doorColor, float xLocation, float yLocation) {
             this.animationEnabled =false;
         }
 
+    }
+
+
+    public void addEventListener(EventListener event) {
+        this.addListener(event);
     }
 
 
