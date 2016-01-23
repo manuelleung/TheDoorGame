@@ -78,6 +78,10 @@ public class Door extends Actor {
     // texture: current texture of the door                  //
     private Texture currentTexture;                          //
     private Texture [] textureArray = BLUE_DOOR_TEXTURE;     //-> Texture: BLUE DOOR by default
+                                                             //
+    //for resizing door                                      //
+    private float width;                                     //
+    private float height;                                    //
 //-----------------------------------------------------------//
 
 
@@ -88,7 +92,9 @@ public class Door extends Actor {
  * *************************************/
     public Door() {
         setCurrentTexture(BLUE_DOOR_TEXTURE[0]); //-> Default Color: BLUE
-        setLocation(0,0);                        //-> Default Location: (0,0)
+        setLocation(0, 0);                        //-> Default Location: (0,0)
+        resize(currentTexture.getWidth(),
+               currentTexture.getHeight());
 
     }
 
@@ -99,15 +105,19 @@ public class Door extends Actor {
     public Door (int doorColor) {
         setUpDoorColor(doorColor);
         setLocation(0, 0);                       //-> Default Location (0,0)
+        resize(currentTexture.getWidth(),
+               currentTexture.getHeight());
     }
 
 
 /* *************************************
           CONSTRUCTOR (x,y)
 * *************************************/
-    public Door (float xLocation, float yLocation) {
+public Door (float xLocation, float yLocation) {
         setCurrentTexture(BLUE_DOOR_TEXTURE[0]); //-> Default Color: BLUE
         setLocation(xLocation, yLocation);
+        resize(currentTexture.getWidth(),
+               currentTexture.getHeight());
     }
 
 
@@ -115,9 +125,11 @@ public class Door extends Actor {
 /* *************************************
               CONSTRUCTOR (Color, x, y)
  * *************************************/
-    public Door (int doorColor, float xLocation, float yLocation) {
+public Door (int doorColor, float xLocation, float yLocation) {
         setUpDoorColor(doorColor);
         setLocation(xLocation, yLocation);
+        resize(currentTexture.getWidth(),
+               currentTexture.getHeight());
     }
 
 
@@ -140,7 +152,7 @@ public class Door extends Actor {
 
 
         }
-       batch.draw(currentTexture, locationX, locationY);
+       batch.draw(currentTexture, locationX, locationY,width,height);
     }
 
 
@@ -171,6 +183,19 @@ public class Door extends Actor {
 
     public void setOccupied(boolean isOccupied) {
         this.isOccupied = isOccupied;
+    }
+
+    public void resize(float width, float height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
     }
 
 
@@ -204,6 +229,13 @@ public class Door extends Actor {
         return animationEnabled;
     }
 
+    public float getWidth() {
+        return this.width;
+    }
+
+    public float getHeight() {
+        return this.height;
+    }
 
 
 

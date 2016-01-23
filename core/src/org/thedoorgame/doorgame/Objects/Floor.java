@@ -105,7 +105,7 @@ public class Floor extends Actor {
     }
 
     public float getHeight() {
-        return this.getHeight();
+        return this.height;
     }
 
 

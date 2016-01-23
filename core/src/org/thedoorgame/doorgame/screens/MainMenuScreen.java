@@ -137,20 +137,27 @@ public class MainMenuScreen implements Screen {
         table.debug();
         stage.addActor(table);
 
-        // Door example
-        Door greenDoor = new Door(Door.GREEN,350,200);
-        greenDoor.play();
-        stage.addActor(greenDoor);
+        //-------------- Creating two floors example --------------//
+                                                                   //
+        // Initialize two floors:                                  //
+        FloorCreator floor1 = new FloorCreator(stage);             //
+        FloorCreator floor2 = new FloorCreator(stage);             //
+                                                                   //
+        // Create floors                                           //        WARNING:
+        floor1.createFloor();                                      //  You must create the floors
+        floor2.createFloor();                                      //  first, before you relocate
+                                                                   //  them.
+        // relocate floors                                         //
+        floor1.setLocation(150,0);                                 //
+        floor2.setLocation(150,500);                               //
 
-        // Character example
-        Character bobby = new Character(Character.BOBBY,150,200);
-        bobby.play();
-        bobby.resize(100,115);
-        stage.addActor(bobby);
+       // floor1.increaseHeightBy(200);
+                                                                   //
+        //----------------- Done ----------------------------------//
 
-        // Floor example
-        Floor floor = new Floor(150, 150);
-        stage.addActor(floor);
+
+
+
 
 
 
