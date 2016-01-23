@@ -1,8 +1,5 @@
 package org.thedoorgame.doorgame.Objects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 /**
@@ -18,11 +15,20 @@ public class FloorCreator {
     private float distance = 30; // starting distance
     private Stage stage;
 
+
+
+/* ****************************
+        Constructor (stage)
+ * ***************************/
     public FloorCreator(Stage stage) {
         this.stage = stage;
     }
 
 
+
+/* *****************************
+        createFloor() Method
+ * ****************************/
     public void createFloor() {
         // build floor
         floor = new Floor();
@@ -36,56 +42,81 @@ public class FloorCreator {
             distance += DISTANCE_BETWEEN_DOORS;
             stage.addActor(doors[i]);
         }
-
-
-
-
-
-
     }
 
 
-    public void setLocation(float locationX, float locationY) {
-        floor.setLocation(floor.getLocationX() + locationX,
-                floor.getLocationY() + locationY);
 
-        for(int i =0; i < NUMBER_OF_DOORS; i++) {
+
+/* ***********************************************
+                    S E T T E R S
+ * **********************************************/
+    public void setLocation(float locationX, float locationY) {
+        // modify and set floor location
+        floor.setLocation(floor.getLocationX() + locationX,           //
+                floor.getLocationY() + locationY);                    //    This method sets the
+                                                                      //    location of the floor
+        // modify and set doors location                              //    and doors at the same
+        for(int i =0; i < NUMBER_OF_DOORS; i++) {                     //    time
             doors[i].setLocation(doors[i].getLocationX() + locationX,
-                                 doors[i].getLocationY() + locationY);
+                    doors[i].getLocationY() + locationY);
         }
 
     }
+
+
 
     public void increaseWidthBy (float width) {
-        for(int i =0; i < NUMBER_OF_DOORS; i++) {
-            doors[i].setWidth(doors[i].getWidth() + width);
-        }
-
+        // Modify and set width of doors
+        for(int i =0; i < NUMBER_OF_DOORS; i++) {                    //
+            doors[i].setWidth(doors[i].getWidth() + width);          //  This method increases the
+        }                                                            //  the floor and doors's width
+        // Modify and set Floor width                                //  at the same time
         floor.setWidth(floor.getWidth() + width);
     }
 
-    public void decreaseWidthBy (float width) {
-        for(int i =0; i < NUMBER_OF_DOORS; i++) {
-            doors[i].setWidth(doors[i].getWidth() - width);
-        }
 
+
+    public void decreaseWidthBy (float width) {
+        // Modify and set width of doors                            //
+        for(int i =0; i < NUMBER_OF_DOORS; i++) {                   //  This method decreases the
+            doors[i].setWidth(doors[i].getWidth() - width);         //  the floor and door's width
+        }                                                           //  at the same time.
+        // Modify and set Floor width
         floor.setWidth(floor.getWidth() - width);
     }
 
-    public void increaseHeightBy (float height) {
-        for(int i =0; i < NUMBER_OF_DOORS; i++) {
-            doors[i].setHeight(doors[i].getHeight() + height);
-        }
 
+
+    public void increaseHeightBy (float height) {
+        // Modify and set doors height
+        for(int i =0; i < NUMBER_OF_DOORS; i++) {                  //  This method increases the
+            doors[i].setHeight(doors[i].getHeight() + height);     //  the floor and door's height
+        }                                                          //  at the same time.
+        // Modify and set floor height
         floor.setHeight(floor.getHeight() + height);
     }
 
-    public void decreaseHeightBy (float height) {
-        for(int i =0; i < NUMBER_OF_DOORS; i++) {
-            doors[i].setHeight(doors[i].getHeight() - height);
-        }
 
+
+    public void decreaseHeightBy (float height) {
+        // Modify and set doors height
+        for(int i =0; i < NUMBER_OF_DOORS; i++) {                   // This method decreases the
+            doors[i].setHeight(doors[i].getHeight() - height);      // the floor and door's height
+        }                                                           // at the same time.
+        // Modify and sett floor height
         floor.setHeight(floor.getHeight() - height);
+    }
+
+
+/* ***********************************************
+                    G E T T E R S
+ * **********************************************/
+    public Door getDoor(int index) {
+        return doors[index];
+    }
+
+    public Floor getFloor() {
+        return floor;
     }
 
 }
