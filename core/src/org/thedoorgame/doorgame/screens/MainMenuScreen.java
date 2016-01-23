@@ -13,7 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import org.thedoorgame.doorgame.DoorGame;
-import org.thedoorgame.doorgame.Objects.Door;
+import org.thedoorgame.doorgame.Objects.*;
+import org.thedoorgame.doorgame.Objects.Character;
 
 public class MainMenuScreen implements Screen {
 
@@ -135,9 +136,22 @@ public class MainMenuScreen implements Screen {
         table.add(buttonExit);
         table.debug();
         stage.addActor(table);
-        Door greenDoor = new Door(Door.GREEN,100,100);
-        greenDoor.setLocation(500,500);
+
+        // Door example
+        Door greenDoor = new Door(Door.GREEN,350,200);
+        greenDoor.play();
         stage.addActor(greenDoor);
+
+        // Character example
+        Character bobby = new Character(Character.BOBBY,150,200);
+        bobby.play();
+        bobby.resize(100,115);
+        stage.addActor(bobby);
+
+        // Floor example
+        Floor floor = new Floor(150, 150);
+        stage.addActor(floor);
+
 
 
     }

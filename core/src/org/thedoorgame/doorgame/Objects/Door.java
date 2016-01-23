@@ -3,6 +3,7 @@ package org.thedoorgame.doorgame.Objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
@@ -61,10 +62,22 @@ public class Door extends Actor {
 //--------------------------------------------//
 
 //------------------ Other Data Fields: ---------------------//
+    //booleans:                                              //
     private boolean isOccupied = false;                      //
-    private Texture currentTexture;                          //
+    private boolean animationEnabled = false;                //
+                                                             //
+    //for x and y location of the door                       //
     private float locationX;                                 //
     private float locationY;                                 //
+                                                             //
+    // for animation purposes                                //
+    private static final float ANIMATION_TIME = 3F;          //
+    private float timer = 0;                                 //
+    private int textureCount = 0;                            //
+                                                             //
+    // texture: current texture of the door                  //
+    private Texture currentTexture;                          //
+    private Texture [] textureArray = BLUE_DOOR_TEXTURE;     //-> Texture: BLUE DOOR by default
 //-----------------------------------------------------------//
 
 
@@ -76,6 +89,7 @@ public class Door extends Actor {
     public Door() {
         setCurrentTexture(BLUE_DOOR_TEXTURE[0]); //-> Default Color: BLUE
         setLocation(0,0);                        //-> Default Location: (0,0)
+
     }
 
 
@@ -103,7 +117,7 @@ public class Door extends Actor {
  * *************************************/
     public Door (int doorColor, float xLocation, float yLocation) {
         setUpDoorColor(doorColor);
-        setLocation(xLocation,yLocation);
+        setLocation(xLocation, yLocation);
     }
 
 
@@ -117,6 +131,15 @@ public class Door extends Actor {
  * ***********************************/
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        timer -= parentAlpha;
+        if(timer <= 0) {
+            timer = ANIMATION_TIME;
+            if(animationEnabled) {
+                playAnimation();
+            }
+
+
+        }
        batch.draw(currentTexture, locationX, locationY);
     }
 
@@ -138,9 +161,19 @@ public class Door extends Actor {
         locationY = y;
     }
 
-    public void setIsOccupied(boolean isOccupied) {
+    public void setLocationX(float x) {
+        locationX = x;
+    }
+
+    public void setLocationY(float y) {
+        locationY = y;
+    }
+
+    public void setOccupied(boolean isOccupied) {
         this.isOccupied = isOccupied;
     }
+
+
 
 
 
@@ -163,6 +196,14 @@ public class Door extends Actor {
         return locationY;
     }
 
+    public boolean IsOccupied() {
+        return isOccupied;
+    }
+
+    public boolean IsPlaying() {
+        return animationEnabled;
+    }
+
 
 
 
@@ -177,23 +218,73 @@ public class Door extends Actor {
         switch(doorColor) {
             case BLUE:
                 setCurrentTexture(BLUE_DOOR_TEXTURE[0]);
+                this.textureArray = BLUE_DOOR_TEXTURE;
                 break;
 
             case GREEN:
                 setCurrentTexture(GREEN_DOOR_TEXTURE[0]);
+                this.textureArray = GREEN_DOOR_TEXTURE;
                 break;
 
             case GRAY:
                 setCurrentTexture(GRAY_DOOR_TEXTURE[0]);
+                this.textureArray = GRAY_DOOR_TEXTURE;
                 break;
 
             case ORANGE:
                 setCurrentTexture(ORANGE_DOOR_TEXTURE[0]);
+                this.textureArray = ORANGE_DOOR_TEXTURE;
                 break;
 
             case YELLOW:
                 setCurrentTexture(YELLOW_DOOR_TEXTURE[0]);
+                this.textureArray = YELLOW_DOOR_TEXTURE;
                 break;
         }
+    }
+
+
+
+
+/* **************************
+      checkForEvent() Method
+ * **************************/
+    private void playAnimation() {
+        if(textureCount < textureArray.length-1) {
+            textureCount++;
+            setCurrentTexture(textureArray[textureCount]);
+        }
+        else {
+            textureCount = 0;
+            this.animationEnabled =false;
+        }
+
+    }
+
+
+
+
+
+
+/* **************************
+          play() Method
+ * **************************/
+    public void play() {
+        this.animationEnabled = true;
+    }
+
+/* **************************
+         pause() Method
+ * **************************/
+    public void pause() {
+        this.animationEnabled = false;
+    }
+
+/* **************************
+           stop() Method
+ * **************************/
+    public void stop() {
+        this.animationEnabled = false;
+        setCurrentTexture(textureArray[0]);
     }
 }
