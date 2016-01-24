@@ -53,8 +53,8 @@ public class Character extends Actor {
     private float speed = 10;                                //
                                                              //
     //for texture size:                                      //
-    private float width;                                     //
-    private float height;                                    //
+    private float width = 100;                               //
+    private float height = 110;                              //
                                                              //
     private ArrayList<Float> locationsOfFloors               //
             = new ArrayList<Float>();                        //

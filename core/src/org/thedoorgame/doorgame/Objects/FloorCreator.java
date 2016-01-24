@@ -1,12 +1,16 @@
 package org.thedoorgame.doorgame.Objects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 /**
  * Created by Leibniz H. Berihuete on 1/22/2016.
  */
 public class FloorCreator {
-    public static final int NUMBER_OF_DOORS = 5;
+    public static final int NUMBER_OF_DOORS = (int)(Gdx.graphics.getWidth()/new Door(
+            
+    ).getWidth());
     private static final float DISTANCE_BETWEEN_DOORS = 200;
     private  Door [] doors = new Door[NUMBER_OF_DOORS];
 
@@ -36,7 +40,7 @@ public class FloorCreator {
 
         // build Doors
         for(int i = 0; i < NUMBER_OF_DOORS; i++) {
-            doors[i] = new Door(i);
+            doors[i] = new Door(getRandomDoorColor());
             doors[i].setLocationX(floor.getLocationX() + distance);
             doors[i].setLocationY(floor.getHeight());
             distance += DISTANCE_BETWEEN_DOORS;
@@ -105,6 +109,10 @@ public class FloorCreator {
         }                                                           // at the same time.
         // Modify and sett floor height
         floor.setHeight(floor.getHeight() - height);
+    }
+
+    private int getRandomDoorColor () {
+        return MathUtils.random(4);
     }
 
 
