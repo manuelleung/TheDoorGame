@@ -3,6 +3,7 @@ package org.thedoorgame.doorgame.Objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
@@ -49,7 +50,7 @@ public class Character extends Actor {
     private static final float ANIMATION_TIME = 0F;          //
     private float timer = ANIMATION_TIME;                    //
     private int textureCount = 0;                            //
-    private String moving = "RIGHT";                         //
+    private String moving = "";                              //
     private float speed = 10;                                //
                                                              //
     //for texture size:                                      //
@@ -107,23 +108,26 @@ public class Character extends Actor {
  * ***********************/
     public Character(int player, float locationX, float locationY) {
         setUpCharacter(player);
-        setLocation(locationX,locationY);
+        setLocation(locationX, locationY);
         resize(currentTexture.getWidth(), currentTexture.getHeight());
+
     }
 
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         timer -= parentAlpha;
-        if(timer <= 0) {
+        if (timer <= 0) {
             timer = ANIMATION_TIME;
-            if(animationEnabled) {
+            if (animationEnabled) {
                 checkForOutOfBounce();
                 playAnimation();
             }
         }
+
         batch.draw(currentTexture, locationX, locationY, width, height);
         setBounds(locationX, locationY, width, height);
+
     }
 
 
@@ -247,7 +251,7 @@ public class Character extends Actor {
             }
         }
         else if(locationX < (0-this.width)) {
-            locationX = Gdx.graphics.getWidth() - this.width;
+            locationX = Gdx.graphics.getWidth();
             if(floorsGiven){
                 locationY = locationsOfFloors.get(MathUtils.random(locationsOfFloors.size()-1)) + floorHeight;
             }
@@ -255,11 +259,11 @@ public class Character extends Actor {
     }
 
     public void moveRight() {
-        moving.equals("RIGHT");
+        moving = "RIGHT";
     }
 
     public void moveLeft() {
-        moving.equals("LEFT");
+        moving = "LEFT";
     }
 
 

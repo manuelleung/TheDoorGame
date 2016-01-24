@@ -28,6 +28,7 @@ public class GameScreen implements Screen {
 
 
     private int width, height;
+    private final Character bobby = new Character(Character.BOBBY);
 
 // -------------- ADDED BY LEIBNIZ ---------------//
     private static final int GRID_CELL = 32;      //    This is for grid-display and
@@ -88,28 +89,29 @@ public class GameScreen implements Screen {
             }
         });
 
-        floor1.getDoor(1).addListener(new ClickListener(){
+        floor1.getDoor(1).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor1.getDoor(1).play();
             }
         });
 
-        floor1.getDoor(2).addListener(new ClickListener(){
+        floor1.getDoor(2).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor1.getDoor(2).play();
             }
         });
 
-        floor1.getDoor(3).addListener(new ClickListener(){
+        floor1.getDoor(3).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor1.getDoor(3).play();
+
             }
         });
 
-        floor1.getDoor(4).addListener(new ClickListener(){
+        floor1.getDoor(4).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor1.getDoor(4).play();
@@ -119,17 +121,18 @@ public class GameScreen implements Screen {
 /* *****************************
         2nd FLOOR
  * ****************************/
-        floor2.getDoor(0).addListener(new ClickListener(){
+        floor2.getDoor(0).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(0).play();
             }
         });
 
-        floor2.getDoor(1).addListener(new ClickListener(){
+        floor2.getDoor(1).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(1).play();
+                bobby.moveLeft();
             }
         });
 
@@ -137,6 +140,7 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(2).play();
+                bobby.moveRight();
             }
         });
 
@@ -151,13 +155,15 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(4).play();
+
             }
         });
-        Character bobby = new Character(Character.BOBBY);
-        bobby.resize(100,110);
+
+        bobby.resize(100, 110);
         bobby.setLocationY(floor1.getFloor().getLocationY() + floor1.getFloor().getHeight());
+        bobby.moveLeft();
         bobby.play();
-        bobby.moveRight();
+
         bobby.setFloors(floor1,floor2);
         stage.addActor(bobby);
 

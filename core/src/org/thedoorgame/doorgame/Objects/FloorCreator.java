@@ -8,15 +8,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  * Created by Leibniz H. Berihuete on 1/22/2016.
  */
 public class FloorCreator {
-    public static final int NUMBER_OF_DOORS = (int)(Gdx.graphics.getWidth()/new Door(
-            
-    ).getWidth());
-    private static final float DISTANCE_BETWEEN_DOORS = 200;
+    public static final int NUMBER_OF_DOORS = 6;
+    private static final float DISTANCE_BETWEEN_DOORS = Gdx.graphics.getWidth()/6.5f;
     private  Door [] doors = new Door[NUMBER_OF_DOORS];
 
     private Floor floor = new Floor();
 
-    private float distance = 30; // starting distance
+    private float distance = DISTANCE_BETWEEN_DOORS * .5f; // starting distance
     private Stage stage;
 
 
