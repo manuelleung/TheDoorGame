@@ -9,10 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import org.thedoorgame.doorgame.DoorGame;
-import org.thedoorgame.doorgame.Objects.Door;
-import org.thedoorgame.doorgame.Objects.FloorCreator;
+import org.thedoorgame.doorgame.Objects.*;
+import org.thedoorgame.doorgame.Objects.Character;
 
 /**
  * Created by Manuel on 1/21/2016.
@@ -44,8 +45,10 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         shapeRenderer = new ShapeRenderer(); // ADDED BY LEIBNIZ for design purposes
-        stage = new Stage();
+        stage = new Stage(new FitViewport(width,height));
+
         Gdx.input.setInputProcessor(stage);
+
 
         //-------------- EXAMPLE: how to create floors-------------//
                                                                    //
@@ -59,8 +62,8 @@ public class GameScreen implements Screen {
                                                                    //  relocate them.
                                                                    //
         // relocate them anywhere you want                         //
-        floor1.setLocation(150,0);                                 //
-        floor2.setLocation(150,500);                               //
+        floor1.setLocation(0,0);                                 //
+        floor2.setLocation(0,350);                               //
                                                                    //
         //----------------- Done ----------------------------------//
 
@@ -137,19 +140,29 @@ public class GameScreen implements Screen {
             }
         });
 
-        floor2.getDoor(3).addListener(new ClickListener(){
+        floor2.getDoor(3).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(3).play();
             }
         });
 
-        floor2.getDoor(4).addListener(new ClickListener(){
+        floor2.getDoor(4).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(4).play();
             }
         });
+        Character bobby = new Character(Character.BOBBY);
+        bobby.resize(100,110);
+        bobby.setLocationY(floor1.getFloor().getLocationY() + floor1.getFloor().getHeight());
+        bobby.play();
+        bobby.moveRight();
+        bobby.setFloors(floor1,floor2);
+        stage.addActor(bobby);
+
+        floor1.getFloor().setWidth(Gdx.graphics.getWidth());
+        floor2.getFloor().setWidth(Gdx.graphics.getWidth());
 
 
 

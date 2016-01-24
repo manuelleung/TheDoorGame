@@ -3,7 +3,10 @@ package org.thedoorgame.doorgame.Objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
+import java.util.ArrayList;
 
 /**
  * Created by Leibniz H. Berihuete on 1/22/2016.
@@ -32,6 +35,7 @@ public class Character extends Actor {
 //--------------- Other Data fields -------------------------//
     //boolean                                                //
     boolean animationEnabled = false;                        //
+    boolean floorsGiven = false;                             //
                                                              //
     //for player floor and door location                     //
     private int floorNumber;                                 //
@@ -42,13 +46,19 @@ public class Character extends Actor {
     private float locationY;                                 //
                                                              //
     //for animation purposes                                 //
-    private static final float ANIMATION_TIME = 3F;          //
+    private static final float ANIMATION_TIME = 0F;          //
     private float timer = ANIMATION_TIME;                    //
     private int textureCount = 0;                            //
+    private String moving = "RIGHT";                         //
+    private float speed = 10;                                //
                                                              //
     //for texture size:                                      //
     private float width;                                     //
     private float height;                                    //
+                                                             //
+    private ArrayList<Float> locationsOfFloors               //
+            = new ArrayList<Float>();                        //
+    private float floorHeight = new Floor().getHeight();     //
                                                              //
                                                              //
     private Texture currentTexture;                          //
@@ -102,22 +112,21 @@ public class Character extends Actor {
     }
 
 
-
-
-
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
         timer -= parentAlpha;
         if(timer <= 0) {
             timer = ANIMATION_TIME;
             if(animationEnabled) {
+                checkForOutOfBounce();
                 playAnimation();
             }
         }
-
-        batch.draw(currentTexture,locationX,locationY,width,height);
+        batch.draw(currentTexture, locationX, locationY, width, height);
+        setBounds(locationX, locationY, width, height);
     }
+
+
 
 
 
@@ -159,6 +168,10 @@ public class Character extends Actor {
         this.height = height;
     }
 
+    public void setSpeed (float speed) {
+        this.speed = speed;
+    }
+
 
 
 
@@ -189,6 +202,10 @@ public class Character extends Actor {
         return this.height;
     }
 
+    public float getSpeed() {
+        return speed;
+    }
+
 
 
 
@@ -211,6 +228,46 @@ public class Character extends Actor {
         }
     }
 
+
+
+    public void setFloors(FloorCreator ...floors) {
+        for(int i = 0; i < floors.length; i++) {
+            locationsOfFloors.add(floors[i].getFloor().getLocationY());
+        }
+        if(floors.length == 2) {
+            floorsGiven = true;
+        }
+    }
+
+    private void checkForOutOfBounce() {
+        if(locationX >= Gdx.graphics.getWidth()) {
+            locationX = 0 - this.width;
+            if(floorsGiven) {
+                locationY = locationsOfFloors.get(MathUtils.random(locationsOfFloors.size()-1)) + floorHeight;
+            }
+        }
+        else if(locationX < (0-this.width)) {
+            locationX = Gdx.graphics.getWidth() - this.width;
+            if(floorsGiven){
+                locationY = locationsOfFloors.get(MathUtils.random(locationsOfFloors.size()-1)) + floorHeight;
+            }
+        }
+    }
+
+    public void moveRight() {
+        moving.equals("RIGHT");
+    }
+
+    public void moveLeft() {
+        moving.equals("LEFT");
+    }
+
+
+
+
+
+
+
 /* ***********************
         playAnimation()
  * **********************/
@@ -221,6 +278,13 @@ public class Character extends Actor {
         }
         else {
             textureCount = 0;
+        }
+
+        if(moving.equals("RIGHT")) {
+            locationX += speed;
+        }
+        else if(moving.equals("LEFT")) {
+            locationX -= speed;
         }
     }
 
