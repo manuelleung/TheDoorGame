@@ -87,4 +87,37 @@ public class DoorChooser {
 
     }
 
+
+    /**
+     * goToDestination
+     * @param character holds a Character instance
+     */
+    public void goToDestination(Character character) {
+        // Get Floor and Door numbers
+        int floorNumber = character.getFloorNumber();
+        int doorNumber = character.getDoorNumber();
+
+        // Get the floor and door actors
+        Floor floor = floors.get(floorNumber).getFloor();
+        Door door = doors.get(doorNumber);
+
+        // Check if the character is on the correct floor;
+        if(character.getLocationY() == (floor.getLocationY() + floor.getHeight())) {
+
+            // comparare distance between door and character
+            if(character.getLocationX() > door.getLocationX()) {
+                character.moveLeft();
+            }
+            else if(character.getLocationX() < door.getLocationX()) {
+                character.moveRight();
+            }
+            else {
+                character.stop(); // stop the character from moving.
+                door.play();      // Open the door
+                character.setVisible(false); // make the character disappear inside the door
+            }
+
+        }
+    }
+
 }

@@ -176,6 +176,14 @@ public class Character extends Actor {
         this.speed = speed;
     }
 
+    public void setFloorNumber(int floorNumber) {
+        this.floorNumber = floorNumber;
+    }
+
+    public void setDoorNumber(int doorNumber) {
+        this.doorNumber = doorNumber;
+    }
+
 
 
 
@@ -208,6 +216,14 @@ public class Character extends Actor {
 
     public float getSpeed() {
         return speed;
+    }
+
+    public int getDoorNumber() {
+        return this.doorNumber;
+    }
+
+    public int getFloorNumber() {
+        return this.floorNumber;
     }
 
 
