@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import javax.xml.transform.dom.DOMResult;
+
 /**
  * Created by Leibniz H. Berihuete on 1/22/2016.
  */
@@ -123,6 +125,10 @@ public class FloorCreator {
 
     public Floor getFloor() {
         return floor;
+    }
+
+    public int getNumberOfDoors() {
+        return NUMBER_OF_DOORS;
     }
 
 }

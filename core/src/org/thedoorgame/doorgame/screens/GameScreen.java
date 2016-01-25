@@ -53,7 +53,7 @@ public class GameScreen implements Screen {
 
         //-------------- EXAMPLE: how to create floors-------------//
                                                                    //
-        // Initialize two floors:                                  //
+        // Initialize two floors:
         final FloorCreator floor1 = new FloorCreator(stage);       //
         final FloorCreator floor2 = new FloorCreator(stage);       //
                                                                    //
@@ -63,8 +63,8 @@ public class GameScreen implements Screen {
                                                                    //  relocate them.
                                                                    //
         // relocate them anywhere you want                         //
-        floor1.setLocation(0,0);                                 //
-        floor2.setLocation(0,350);                               //
+        floor1.setLocation(0,0);                                   //
+        floor2.setLocation(0,350);                                 //
                                                                    //
         //----------------- Done ----------------------------------//
 
@@ -132,7 +132,7 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(1).play();
-                bobby.moveLeft();
+                //bobby.moveLeft();
             }
         });
 
@@ -140,7 +140,7 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(2).play();
-                bobby.moveRight();
+                //bobby.moveRight();
             }
         });
 
@@ -162,7 +162,7 @@ public class GameScreen implements Screen {
         bobby.resize(100, 110);
         bobby.setLocationY(floor1.getFloor().getLocationY() + floor1.getFloor().getHeight());
         bobby.moveLeft();
-        bobby.play();
+        //bobby.play();
 
         bobby.setFloors(floor1,floor2);
         stage.addActor(bobby);
