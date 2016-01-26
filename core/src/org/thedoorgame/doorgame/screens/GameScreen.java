@@ -46,6 +46,8 @@ public class GameScreen implements Screen {
 
     }
 
+    FloorCreator floor2;
+
     @Override
     public void show() {
         shapeRenderer = new ShapeRenderer(); // ADDED BY LEIBNIZ for design purposes
@@ -58,7 +60,7 @@ public class GameScreen implements Screen {
                                                                    //
         // Initialize two floors:
         final FloorCreator floor1 = new FloorCreator(stage);       //
-        final FloorCreator floor2 = new FloorCreator(stage);       //
+         floor2 = new FloorCreator(stage);       //
                                                                    //
         // Create floors                                           //        WARNING:
         floor1.createFloor(0);                                      //  You must call the createFloor()
@@ -164,7 +166,7 @@ public class GameScreen implements Screen {
 
         bobby.resize(100, 110);
         bobby.setLocationY(floor1.getFloor().getLocationY() + floor1.getFloor().getHeight());
-        bobby.moveLeft();
+        bobby.moveRight();
         bobby.play();
 
 
@@ -196,6 +198,8 @@ public class GameScreen implements Screen {
         //--------------------------------------------------------------//
     }
 
+
+
     @Override
     public void render(float delta) {
         // clear the screen with a dark blue color. The
@@ -210,8 +214,8 @@ public class GameScreen implements Screen {
         stage.draw();
 
 
-        doorChooser.print();
-        doorChooser.goToDestination(bobby);
+        //doorChooser.print();
+        doorChooser(bobby);
 
 
 

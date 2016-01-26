@@ -79,8 +79,8 @@ public class DoorChooser {
             theDoor = doors.remove(randomIndex);
 
             // TODO
-            theChar.setDoorNumber(theDoor.getDoorNumber());
-            theChar.setFloorNumber(theDoor.getFloorNumber());
+            theChar.setDoorNumber(2);
+            theChar.setFloorNumber(1);
 
             if(characters.isEmpty()) {
                 charactersAvailable = false;
@@ -114,6 +114,7 @@ public class DoorChooser {
         Door door = floors.get(floorNumber).getDoor(doorNumber);
 
 
+
         // Check if the character is on the correct floor;
         if(character.getLocationY() == (floor.getLocationY() + floor.getHeight())) {
 
@@ -125,6 +126,7 @@ public class DoorChooser {
                 character.moveRight();
             }
             else {
+                //System.out.println("HEREeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 character.stop(); // stop the character from moving.
                 door.play();      // Open the door
                 character.setVisible(false); // make the character disappear inside the door
