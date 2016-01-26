@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -15,6 +16,8 @@ import org.thedoorgame.doorgame.DoorGame;
 import org.thedoorgame.doorgame.Objects.*;
 import org.thedoorgame.doorgame.Objects.Character;
 import org.thedoorgame.doorgame.random.DoorChooser;
+
+import java.util.ArrayList;
 
 /**
  * Created by Manuel on 1/21/2016.
@@ -31,7 +34,13 @@ public class GameScreen implements Screen {
 
 
     private int width, height;
+
+    private ArrayList<Character> characters = new ArrayList<Character>();
+
     private final Character bobby = new Character(Character.BOBBY);
+    private final Character bobby2 = new Character(Character.BOBBY);
+    private final Character bobby3 = new Character(Character.BOBBY);
+    private final Character bobby4 = new Character(Character.BOBBY);
 
 // -------------- ADDED BY LEIBNIZ ---------------//
     private static final int GRID_CELL = 32;      //    This is for grid-display and
@@ -44,9 +53,9 @@ public class GameScreen implements Screen {
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
 
+
     }
 
-    FloorCreator floor2;
 
     @Override
     public void show() {
@@ -60,7 +69,7 @@ public class GameScreen implements Screen {
                                                                    //
         // Initialize two floors:
         final FloorCreator floor1 = new FloorCreator(stage);       //
-         floor2 = new FloorCreator(stage);       //
+        final FloorCreator floor2 = new FloorCreator(stage);       //
                                                                    //
         // Create floors                                           //        WARNING:
         floor1.createFloor(0);                                      //  You must call the createFloor()
@@ -141,7 +150,7 @@ public class GameScreen implements Screen {
             }
         });
 
-        floor2.getDoor(2).addListener(new ClickListener(){
+        floor2.getDoor(2).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(2).play();
@@ -164,20 +173,36 @@ public class GameScreen implements Screen {
             }
         });
 
-        bobby.resize(100, 110);
-        bobby.setLocationY(floor1.getFloor().getLocationY() + floor1.getFloor().getHeight());
-        bobby.moveRight();
-        bobby.play();
+        //bobby.resize(100, 110);
+        //bobby.setLocationY(floor1.getFloor().getLocationY() + floor1.getFloor().getHeight());
+        //bobby.moveRight();
+        //bobby.play();
+
+        //testing multiple characters
+        characters.add(bobby);
+        characters.add(bobby2);
+        characters.add(bobby3);
+        characters.add(bobby4);
+        ////////////////////////////
 
 
 
 
-        bobby.setFloors(floor1,floor2);
-        stage.addActor(bobby);
 
-        floor1.getFloor().setWidth(Gdx.graphics.getWidth());
-        floor2.getFloor().setWidth(Gdx.graphics.getWidth());
 
+        for(int i=0; i<characters.size(); i++) {
+            characters.get(i).resize(100, 110);
+            characters.get(i).setLocationY(floor1.getFloor().getLocationY() + floor1.getFloor().getHeight());
+            characters.get(i).setLocationX(MathUtils.random(Gdx.graphics.getWidth()) - 1);
+            characters.get(i).setSpeed(MathUtils.random(10) + 5);
+            characters.get(i).moveRight();
+            characters.get(i).play();
+            characters.get(i).setFloors(floor1, floor2);
+
+            //doorChooser.addCharacters(characters.get(i));
+
+            stage.addActor(characters.get(i));
+        }
 
         // Test chooser ... Dont mind all the calls.
         // kept them separate for testing
@@ -185,10 +210,17 @@ public class GameScreen implements Screen {
         doorChooser.addFloor(floor1);
         doorChooser.addFloor(floor2);
         doorChooser.addDoors();
-        doorChooser.addCharacters(bobby);
+        doorChooser.addCharacters(characters);
         doorChooser.shuffleLists();
         doorChooser.chooseCharacter();
         doorChooser.randomDoorChooser();
+
+
+        //bobby.setFloors(floor1,floor2);
+        //stage.addActor(bobby);
+
+        floor1.getFloor().setWidth(Gdx.graphics.getWidth());
+        floor2.getFloor().setWidth(Gdx.graphics.getWidth());
 
 
 
@@ -209,13 +241,19 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+
+        /*
+        // TODO do this out of rendering
+        doorChooser.goToDestination(bobby);
+        doorChooser.goToDestination(bobby2);
+        doorChooser.goToDestination(bobby3);
+        doorChooser.goToDestination(bobby4);
+        */
+
         drawGrid(); // ADDED by LEIBNIZ
         stage.act(delta);
         stage.draw();
 
-
-        //doorChooser.print();
-        doorChooser(bobby);
 
 
 

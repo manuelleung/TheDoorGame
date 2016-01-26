@@ -49,8 +49,9 @@ public class DoorChooser {
     }
 
     /* Register characters */
-    public void addCharacters(Character c) {
-        characters.add(c);
+    public void addCharacters(ArrayList<Character> characters) {
+        //characters.add(character);
+        this.characters=characters;
     }
 
     /* Shuffle the lists for more randomization */
@@ -79,8 +80,8 @@ public class DoorChooser {
             theDoor = doors.remove(randomIndex);
 
             // TODO
-            theChar.setDoorNumber(2);
-            theChar.setFloorNumber(1);
+            theChar.setDoorNumber(theDoor.getDoorNumber());
+            theChar.setFloorNumber(theDoor.getFloorNumber());
 
             if(characters.isEmpty()) {
                 charactersAvailable = false;
@@ -97,42 +98,41 @@ public class DoorChooser {
 
     /**
      * goToDestination
-     * @param character holds a Character instance
      */
     public void goToDestination(Character character) {
-        // Get Floor and Door numbers
-        int floorNumber = character.getFloorNumber();
-        int doorNumber = character.getDoorNumber();
 
-        // Get the floor and door actors
-        Floor floor = floors.get(floorNumber).getFloor();
-        //Door door = doors.get(doorNumber);
+        //for (int i=0; i<characters.size(); i++) {
 
-        //floor = floors.get(0).getFloor();
-        //door = doors.get(doorNumber);
+            //Character character = characters.get(i);
 
-        Door door = floors.get(floorNumber).getDoor(doorNumber);
+            // Get Floor and Door numbers
+            int floorNumber = character.getFloorNumber();
+            int doorNumber = character.getDoorNumber();
+
+            // Get the floor and door actors
+            Floor floor = floors.get(floorNumber).getFloor();
+
+            Door door = floors.get(floorNumber).getDoor(doorNumber);
 
 
+            // Check if the character is on the correct floor;
+            if (character.getLocationY() == (floor.getLocationY() + floor.getHeight())) {
 
-        // Check if the character is on the correct floor;
-        if(character.getLocationY() == (floor.getLocationY() + floor.getHeight())) {
+                // comparare distance between door and character
+                if (character.getLocationX() > door.getLocationX() + 10) {
+                    character.moveLeft();
+                } else if (character.getLocationX() < door.getLocationX() - 10) {
+                    character.moveRight();
+                } else {
+                    //System.out.println("HEREeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                    character.stop(); // stop the character from moving.
+                    door.play();      // Open the door
+                    character.setVisible(false); // make the character disappear inside the door
+                }
 
-            // comparare distance between door and character
-            if(character.getLocationX() > door.getLocationX()) {
-                character.moveLeft();
             }
-            else if(character.getLocationX() < door.getLocationX()) {
-                character.moveRight();
-            }
-            else {
-                //System.out.println("HEREeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-                character.stop(); // stop the character from moving.
-                door.play();      // Open the door
-                character.setVisible(false); // make the character disappear inside the door
-            }
 
-        }
+        //}
     }
 
 }
