@@ -64,6 +64,9 @@ public class Character extends Actor {
                                                              //
     private Texture currentTexture;                          //
     private Texture [] textureArray = BOBBY_TEXTURE;         //
+    private Door door;                                       //
+    private Floor floor;                                     //
+    private boolean goToDestination = false;                 //
 //-----------------------------------------------------------//
 
 
@@ -125,6 +128,11 @@ public class Character extends Actor {
             }
         }
 
+        if(goToDestination) {
+            goToDestination();
+        }
+
+
         batch.draw(currentTexture, locationX, locationY, width, height);
         setBounds(locationX, locationY, width, height);
 
@@ -184,6 +192,18 @@ public class Character extends Actor {
         this.doorNumber = doorNumber;
     }
 
+    public void setFloor(Floor floor) {
+        this.floor = floor;
+    }
+
+    public void setDoor(Door door) {
+        this.door = door;
+    }
+
+    public void goToDestinationNow(boolean goToDestination) {
+        this.goToDestination = true;
+    }
+
 
 
 
@@ -224,6 +244,18 @@ public class Character extends Actor {
 
     public int getFloorNumber() {
         return this.floorNumber;
+    }
+
+    public boolean getGoToDestination() {
+        return this.goToDestination;
+    }
+
+    public Door getDoor() {
+        return this.door;
+    }
+
+    public Floor getFloor() {
+        return this.getFloor();
     }
 
 
@@ -311,6 +343,8 @@ public class Character extends Actor {
 
 
 
+
+
 // -------------- Animation Controls -------------------//
     public void play() {
         animationEnabled = true;
@@ -324,5 +358,25 @@ public class Character extends Actor {
         animationEnabled = false;
         setCurrentTexture(textureArray[0]);
 
+    }
+
+    private void goToDestination() {
+
+        // Check if the character is on the correct floor;
+        if (this.getLocationY() == (floor.getLocationY() + floor.getHeight())) {
+
+            // comparare distance between door and character
+            if (this.getLocationX() > door.getLocationX() + 10) {
+                this.moveLeft();
+            } else if (this.getLocationX() < door.getLocationX() - 10) {
+                this.moveRight();
+            } else {
+                //System.out.println("HEREeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                this.stop(); // stop the character from moving.
+                door.play();      // Open the door
+                this.setVisible(false); // make the character disappear inside the door
+            }
+
+        }
     }
 }

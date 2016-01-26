@@ -200,6 +200,9 @@ public class GameScreen implements Screen {
             characters.get(i).setFloors(floor1, floor2);
 
             //doorChooser.addCharacters(characters.get(i));
+            characters.get(i).setFloor(floor2.getFloor());
+            characters.get(i).setDoor(floor2.getDoor(3));
+            characters.get(i).goToDestinationNow(true);
 
             stage.addActor(characters.get(i));
         }
@@ -214,6 +217,14 @@ public class GameScreen implements Screen {
         doorChooser.shuffleLists();
         doorChooser.chooseCharacter();
         doorChooser.randomDoorChooser();
+
+        for(int i =0; i <characters.size(); i++) {
+
+        }
+
+
+
+
 
 
         //bobby.setFloors(floor1,floor2);
