@@ -3,7 +3,6 @@ package org.thedoorgame.doorgame.Objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
@@ -70,6 +69,7 @@ public class Character extends Actor {
 //-----------------------------------------------------------//
 
 
+    private boolean isInside = false;
 
 /* **********************************
         DEFAULT  CONSTRUCTOR
@@ -128,7 +128,7 @@ public class Character extends Actor {
             }
         }
 
-        if(goToDestination) {
+        if(goToDestination && !isInside) {
             goToDestination();
         }
 
@@ -205,6 +205,12 @@ public class Character extends Actor {
     }
 
 
+    public void setIsInside(boolean isInside) {
+        this.isInside = isInside;
+    }
+    public boolean getIsInside() {
+        return isInside;
+    }
 
 
 /* *************************
@@ -377,6 +383,7 @@ public class Character extends Actor {
                 this.stop(); // stop the character from moving.
                 door.play();      // Open the door
                 this.setVisible(false); // make the character disappear inside the door
+                isInside = true;
             }
 
         }
