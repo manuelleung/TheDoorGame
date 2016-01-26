@@ -4,17 +4,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import org.thedoorgame.doorgame.DoorGame;
 import org.thedoorgame.doorgame.Objects.*;
 import org.thedoorgame.doorgame.Objects.Character;
+import org.thedoorgame.doorgame.Question;
 import org.thedoorgame.doorgame.random.DoorChooser;
 
 import java.util.ArrayList;
@@ -27,6 +31,12 @@ public class GameScreen implements Screen {
     final DoorGame doorGame;
     Stage stage;
 
+
+    ////////////////// question/font skin
+    Label textQuestion;
+    Skin skin;
+    TextureAtlas atlas;
+    /////////////
 
     OrthographicCamera camera;
 
@@ -215,6 +225,13 @@ public class GameScreen implements Screen {
         doorChooser.randomDoorChooser();
 
 
+
+
+        // TODO figure out how to ask question after all characters hide
+
+        stage.addActor(askQuestion(bobby));
+
+
         floor1.getFloor().setWidth(Gdx.graphics.getWidth());
         floor2.getFloor().setWidth(Gdx.graphics.getWidth());
 
@@ -226,6 +243,15 @@ public class GameScreen implements Screen {
         //--------------------------------------------------------------//
     }
 
+    public Label askQuestion(Character character) {
+        atlas = new TextureAtlas("ui/button.pack");
+        skin = new Skin(atlas);
+        skin = new Skin(Gdx.files.internal("ui/menuSkin.json"), atlas);
+        textQuestion = new Label("Where is (SOMEONE)" + "?", skin);
+        textQuestion.setFontScale(1);
+
+        return textQuestion;
+    }
 
 
     @Override
@@ -236,6 +262,7 @@ public class GameScreen implements Screen {
         // of the color to be used to clear the screen.
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 
         drawGrid(); // ADDED by LEIBNIZ
         stage.act(delta);
