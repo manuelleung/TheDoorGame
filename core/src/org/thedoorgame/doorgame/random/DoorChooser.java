@@ -6,6 +6,7 @@ import org.thedoorgame.doorgame.Objects.Character;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -24,7 +25,6 @@ public class DoorChooser {
     private int randomIndex;
 
     boolean charactersAvailable = true;
-
 
     /* Constructor */
     public DoorChooser() {
@@ -78,7 +78,8 @@ public class DoorChooser {
             theDoor = doors.remove(randomIndex);
 
             // TODO assign theChar -> theDoor / theFloor
-            // theChar.chosenDoor(theDoor);
+            theChar.setDoorNumber(theDoor.getDoorNumber());
+            theChar.setFloorNumber(theDoor.getFloorNumber());
 
             if(characters.isEmpty()) {
                 charactersAvailable = false;

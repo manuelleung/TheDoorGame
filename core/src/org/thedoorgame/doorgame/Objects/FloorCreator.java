@@ -33,7 +33,7 @@ public class FloorCreator {
 /* *****************************
         createFloor() Method
  * ****************************/
-    public void createFloor() {
+    public void createFloor(int floorNumber) {
         // build floor
         floor = new Floor();
         stage.addActor(floor);
@@ -43,6 +43,10 @@ public class FloorCreator {
             doors[i] = new Door(getRandomDoorColor());
             doors[i].setLocationX(floor.getLocationX() + distance);
             doors[i].setLocationY(floor.getHeight());
+            /////////////////////////
+            doors[i].setFloorNumber(floorNumber);
+            doors[i].setDoorNumber(i);
+            /////////////////////////
             distance += DISTANCE_BETWEEN_DOORS;
             stage.addActor(doors[i]);
         }

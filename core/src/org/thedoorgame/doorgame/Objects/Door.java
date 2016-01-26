@@ -101,7 +101,8 @@ public class Door extends Actor {
     private float height;                                    //
 //-----------------------------------------------------------//
 
-
+    private int floorNumber;
+    private int doorNumber;
 
 
 /* *************************************
@@ -169,8 +170,8 @@ public Door (int doorColor, float xLocation, float yLocation) {
 
 
         }
-        batch.draw(currentTexture, locationX, locationY,width,height);
-        this.setBounds(locationX,locationY,width,height);
+        batch.draw(currentTexture, locationX, locationY, width, height);
+        this.setBounds(locationX, locationY, width, height);
     }
 
 
@@ -219,9 +220,21 @@ public Door (int doorColor, float xLocation, float yLocation) {
 
 
 
+    //////////////////////////////
+    public void setFloorNumber(int floorNumber) {
+        this.floorNumber = floorNumber;
+    }
+    public int getFloorNumber() {
+        return floorNumber;
+    }
 
-
-
+    public void setDoorNumber(int doorNumber) {
+        this.doorNumber = doorNumber;
+    }
+    public int getDoorNumber() {
+        return doorNumber;
+    }
+    //////////////////////////////
 
 
 /* **********************

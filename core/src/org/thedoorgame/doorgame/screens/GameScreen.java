@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import org.thedoorgame.doorgame.DoorGame;
 import org.thedoorgame.doorgame.Objects.*;
 import org.thedoorgame.doorgame.Objects.Character;
+import org.thedoorgame.doorgame.random.DoorChooser;
 
 /**
  * Created by Manuel on 1/21/2016.
@@ -25,6 +26,8 @@ public class GameScreen implements Screen {
 
 
     OrthographicCamera camera;
+
+    DoorChooser doorChooser;
 
 
     private int width, height;
@@ -58,8 +61,8 @@ public class GameScreen implements Screen {
         final FloorCreator floor2 = new FloorCreator(stage);       //
                                                                    //
         // Create floors                                           //        WARNING:
-        floor1.createFloor();                                      //  You must call the createFloor()
-        floor2.createFloor();                                      //  method first, before you
+        floor1.createFloor(0);                                      //  You must call the createFloor()
+        floor2.createFloor(1);                                      //  method first, before you
                                                                    //  relocate them.
                                                                    //
         // relocate them anywhere you want                         //
@@ -162,7 +165,10 @@ public class GameScreen implements Screen {
         bobby.resize(100, 110);
         bobby.setLocationY(floor1.getFloor().getLocationY() + floor1.getFloor().getHeight());
         bobby.moveLeft();
-        //bobby.play();
+        bobby.play();
+
+
+
 
         bobby.setFloors(floor1,floor2);
         stage.addActor(bobby);
@@ -170,6 +176,17 @@ public class GameScreen implements Screen {
         floor1.getFloor().setWidth(Gdx.graphics.getWidth());
         floor2.getFloor().setWidth(Gdx.graphics.getWidth());
 
+
+        // Test chooser ... Dont mind all the calls.
+        // kept them separate for testing
+        doorChooser = new DoorChooser();
+        doorChooser.addFloor(floor1);
+        doorChooser.addFloor(floor2);
+        doorChooser.addDoors();
+        doorChooser.addCharacters(bobby);
+        doorChooser.shuffleLists();
+        doorChooser.chooseCharacter();
+        doorChooser.randomDoorChooser();
 
 
 
@@ -194,7 +211,7 @@ public class GameScreen implements Screen {
 
 
 
-
+        doorChooser.goToDestination(bobby);
 
 
 
