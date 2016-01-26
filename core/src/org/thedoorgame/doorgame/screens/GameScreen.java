@@ -199,11 +199,7 @@ public class GameScreen implements Screen {
             characters.get(i).play();
             characters.get(i).setFloors(floor1, floor2);
 
-            //doorChooser.addCharacters(characters.get(i));
-            characters.get(i).setFloor(floor2.getFloor());
-            characters.get(i).setDoor(floor2.getDoor(3));
             characters.get(i).goToDestinationNow(true);
-
             stage.addActor(characters.get(i));
         }
 
@@ -218,17 +214,6 @@ public class GameScreen implements Screen {
         doorChooser.chooseCharacter();
         doorChooser.randomDoorChooser();
 
-        for(int i =0; i <characters.size(); i++) {
-
-        }
-
-
-
-
-
-
-        //bobby.setFloors(floor1,floor2);
-        //stage.addActor(bobby);
 
         floor1.getFloor().setWidth(Gdx.graphics.getWidth());
         floor2.getFloor().setWidth(Gdx.graphics.getWidth());
@@ -252,22 +237,9 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
-        /*
-        // TODO do this out of rendering
-        doorChooser.goToDestination(bobby);
-        doorChooser.goToDestination(bobby2);
-        doorChooser.goToDestination(bobby3);
-        doorChooser.goToDestination(bobby4);
-        */
-
         drawGrid(); // ADDED by LEIBNIZ
         stage.act(delta);
         stage.draw();
-
-
-
-
 
 
 

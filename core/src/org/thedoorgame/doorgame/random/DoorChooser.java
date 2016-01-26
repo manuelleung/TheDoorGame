@@ -80,8 +80,13 @@ public class DoorChooser {
             theDoor = doors.remove(randomIndex);
 
             // TODO
-            theChar.setDoorNumber(theDoor.getDoorNumber());
-            theChar.setFloorNumber(theDoor.getFloorNumber());
+            //theChar.setDoorNumber(theDoor.getDoorNumber());
+            //theChar.setFloorNumber(theDoor.getFloorNumber());
+
+            theChar.setFloorDestination(floors.get(theDoor.getFloorNumber()).getFloor());
+            theChar.setDoorDestination(floors.get(theDoor.getFloorNumber()).getDoor(theDoor.getDoorNumber()));
+
+            System.out.println(theDoor.getDoorNumber() + " " + theDoor.getFloorNumber());
 
             if(characters.isEmpty()) {
                 charactersAvailable = false;

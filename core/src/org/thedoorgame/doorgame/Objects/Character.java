@@ -192,16 +192,16 @@ public class Character extends Actor {
         this.doorNumber = doorNumber;
     }
 
-    public void setFloor(Floor floor) {
+    public void setFloorDestination(Floor floor) {
         this.floor = floor;
     }
 
-    public void setDoor(Door door) {
+    public void setDoorDestination(Door door) {
         this.door = door;
     }
 
     public void goToDestinationNow(boolean goToDestination) {
-        this.goToDestination = true;
+        this.goToDestination = goToDestination;
     }
 
 
