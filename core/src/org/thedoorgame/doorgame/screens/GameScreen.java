@@ -210,7 +210,7 @@ public class GameScreen implements Screen {
         stage.draw();
 
 
-
+        doorChooser.print();
         doorChooser.goToDestination(bobby);
 
 
@@ -244,6 +244,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
+        shapeRenderer.dispose();
     }
 
 

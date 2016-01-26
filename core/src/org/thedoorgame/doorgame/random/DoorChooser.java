@@ -66,10 +66,11 @@ public class DoorChooser {
         return chosenCharacter;
     }
 
+    Door theDoor;
     /* Random chooser for characters to doors */
     public void randomDoorChooser() {
         Character theChar;
-        Door theDoor;
+        //Door theDoor;
         while (charactersAvailable) {
             theChar = characters.remove(0);
 
@@ -77,7 +78,7 @@ public class DoorChooser {
 
             theDoor = doors.remove(randomIndex);
 
-            // TODO assign theChar -> theDoor / theFloor
+            // TODO
             theChar.setDoorNumber(theDoor.getDoorNumber());
             theChar.setFloorNumber(theDoor.getFloorNumber());
 
@@ -86,6 +87,11 @@ public class DoorChooser {
             }
         }
 
+    }
+
+    public void print() {
+        System.out.println("Door#: " + theDoor.getDoorNumber());
+        System.out.println("Floor#: " + theDoor.getFloorNumber());
     }
 
 
@@ -100,7 +106,13 @@ public class DoorChooser {
 
         // Get the floor and door actors
         Floor floor = floors.get(floorNumber).getFloor();
-        Door door = doors.get(doorNumber);
+        //Door door = doors.get(doorNumber);
+
+        //floor = floors.get(0).getFloor();
+        //door = doors.get(doorNumber);
+
+        Door door = floors.get(floorNumber).getDoor(doorNumber);
+
 
         // Check if the character is on the correct floor;
         if(character.getLocationY() == (floor.getLocationY() + floor.getHeight())) {
