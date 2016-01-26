@@ -293,13 +293,15 @@ public class Character extends Actor {
 
     private void checkForOutOfBounce() {
         if(locationX >= Gdx.graphics.getWidth()) {
-            locationX = 0 - this.width;
+            locationX = Gdx.graphics.getWidth();
+            moveLeft();
             if(floorsGiven) {
                 locationY = locationsOfFloors.get(MathUtils.random(locationsOfFloors.size()-1)) + floorHeight;
             }
         }
         else if(locationX < (0-this.width)) {
-            locationX = Gdx.graphics.getWidth();
+            locationX = 0 - this.width;
+            moveRight();
             if(floorsGiven){
                 locationY = locationsOfFloors.get(MathUtils.random(locationsOfFloors.size()-1)) + floorHeight;
             }
