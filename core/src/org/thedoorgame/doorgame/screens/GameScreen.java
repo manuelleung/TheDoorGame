@@ -48,10 +48,9 @@ public class GameScreen implements Screen {
 
     private ArrayList<Character> characters = new ArrayList<Character>();
 
-    private final Character bobby = new Character(Character.BOBBY);
-    private final Character bobby2 = new Character(Character.BOBBY);
-    private final Character bobby3 = new Character(Character.BOBBY);
-    private final Character bobby4 = new Character(Character.BOBBY);
+    private final Character bobby  = new Character(Character.BOBBY);
+    private final Character mike  = new Character(Character.MIKE);
+    private final Character lala  = new Character(Character.LALA);
 
 // -------------- ADDED BY LEIBNIZ ---------------//
     private static final int GRID_CELL = 32;      //    This is for grid-display and
@@ -72,6 +71,8 @@ public class GameScreen implements Screen {
     public void show() {
         shapeRenderer = new ShapeRenderer(); // ADDED BY LEIBNIZ for design purposes
         stage = new Stage(new FitViewport(width,height));
+
+
 
         Gdx.input.setInputProcessor(stage);
 
@@ -190,11 +191,18 @@ public class GameScreen implements Screen {
         //bobby.moveRight();
         //bobby.play();
 
-        //testing multiple characters
+
         characters.add(bobby);
-        characters.add(bobby2);
-        characters.add(bobby3);
-        characters.add(bobby4);
+        characters.add(mike);
+        characters.add(lala);
+
+
+        //testing multiple characters
+//        characters.add(bobby);
+//        characters.add(bobby2);
+//        characters.add(bobby3);
+//        characters.add(bobby4);
+//        characters.add(mike);
         ////////////////////////////
 
 
@@ -270,7 +278,7 @@ public class GameScreen implements Screen {
 
         drawGrid(); // ADDED by LEIBNIZ
 
-        
+
         score.addScore(1);
 
         stage.act(delta);

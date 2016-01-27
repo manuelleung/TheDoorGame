@@ -22,13 +22,34 @@ public class Character extends Actor {
         new Texture(Gdx.files.internal("player2.png")),   //
         new Texture(Gdx.files.internal("player1.png")),   //
     };                                                    // -> More Textures coming soon
+    private static final Texture [] MIKE_TEXTURE = {      //
+            new Texture(Gdx.files.internal("mike0.png")), //
+            new Texture(Gdx.files.internal("mike1.png")), //
+            new Texture(Gdx.files.internal("mike2.png")), //
+            new Texture(Gdx.files.internal("mike3.png")), //
+            new Texture(Gdx.files.internal("mike4.png")), //
+            new Texture(Gdx.files.internal("mike5.png")), //
+            new Texture(Gdx.files.internal("mike6.png")), //
+            new Texture(Gdx.files.internal("mike7.png")), //
+    };                                                    //
+    private static final Texture [] LALA_TEXTURE = {      //
+            new Texture(Gdx.files.internal("lala0.png")), //
+            new Texture(Gdx.files.internal("lala1.png")), //
+            new Texture(Gdx.files.internal("lala2.png")), //
+            new Texture(Gdx.files.internal("lala3.png")), //
+            new Texture(Gdx.files.internal("lala4.png")), //
+            new Texture(Gdx.files.internal("lala5.png")), //
+            new Texture(Gdx.files.internal("lala6.png")), //
+            new Texture(Gdx.files.internal("lala7.png")), //
+    };
 //--------------------------------------------------------//
 
 
 
 //---------- Static Player Values ---------//
     public static final int BOBBY = 0;     //
-                                           //
+    public static final int MIKE = 1;      //
+    public static final int LALA = 2;      //
                                            //
                                            //-> More players coming soon
 //-----------------------------------------//
@@ -280,6 +301,14 @@ public class Character extends Actor {
             case BOBBY:
                 textureArray = BOBBY_TEXTURE;
                 setCurrentTexture(BOBBY_TEXTURE[0]);
+                break;
+            case MIKE:
+                textureArray = MIKE_TEXTURE;
+                setCurrentTexture(MIKE_TEXTURE[0]);
+                break;
+            case LALA:
+                textureArray = LALA_TEXTURE;
+                setCurrentTexture(LALA_TEXTURE[0]);
                 break;
 
             //...
