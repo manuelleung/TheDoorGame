@@ -7,11 +7,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 
+import org.thedoorgame.doorgame.GameSound;
+
 
 /**
  * Created by Leibniz H. Berihuete on 1/22/2016.
  */
 public class Door extends Actor {
+    GameSound gameSound = new GameSound();
 
  //---------------------- TEXTURES ----------------------------------//
     private static final Texture [] BLUE_DOOR_TEXTURE = {            //
@@ -99,6 +102,9 @@ public class Door extends Actor {
     //for resizing door                                      //
     private float width;                                     //
     private float height;                                    //
+                                                             //
+    private boolean openSoundPlayed = false;                 //
+    private boolean closeSoundPlayed = false;                //
 //-----------------------------------------------------------//
 
     private int floorNumber;
@@ -313,14 +319,24 @@ public Door (int doorColor, float xLocation, float yLocation) {
       checkForEvent() Method
  * **************************/
     private void playAnimation() {
+        if(textureCount == 1) {
+            gameSound.getSound(GameSound.DOOR_OPENING).play();
+        }
+
+        if(textureCount == textureArray.length-1) {
+            gameSound.getSound(GameSound.DOOR_CLOSING).play();
+        }
         if(textureCount < textureArray.length-1) {
             textureCount++;
             setCurrentTexture(textureArray[textureCount]);
         }
         else {
+
             textureCount = 0;
             setCurrentTexture(textureArray[textureCount]);
             this.animationEnabled =false;
+            openSoundPlayed = false;
+            closeSoundPlayed = false;
         }
 
     }

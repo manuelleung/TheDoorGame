@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import org.thedoorgame.doorgame.DoorGame;
+import org.thedoorgame.doorgame.GameSound;
 import org.thedoorgame.doorgame.Objects.*;
 import org.thedoorgame.doorgame.Objects.Character;
 import org.thedoorgame.doorgame.Score;
@@ -27,7 +28,6 @@ import java.util.ArrayList;
  * Created by Manuel on 1/21/2016.
  */
 public class GameScreen implements Screen {
-
     final DoorGame doorGame;
     Stage stage;
 
@@ -71,6 +71,7 @@ public class GameScreen implements Screen {
     public void show() {
         shapeRenderer = new ShapeRenderer(); // ADDED BY LEIBNIZ for design purposes
         stage = new Stage(new FitViewport(width,height));
+
 
 
 
