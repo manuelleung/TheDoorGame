@@ -319,6 +319,7 @@ public Door (int doorColor, float xLocation, float yLocation) {
         }
         else {
             textureCount = 0;
+            setCurrentTexture(textureArray[textureCount]);
             this.animationEnabled =false;
         }
 

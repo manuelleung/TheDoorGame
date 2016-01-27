@@ -3,6 +3,7 @@ package org.thedoorgame.doorgame.Objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
@@ -66,6 +67,7 @@ public class Character extends Actor {
     private Door door;                                       //
     private Floor floor;                                     //
     private boolean goToDestination = false;                 //
+    private boolean facingLeft = false;                      //
 //-----------------------------------------------------------//
 
 
@@ -133,7 +135,7 @@ public class Character extends Actor {
         }
 
 
-        batch.draw(currentTexture, locationX, locationY, width, height);
+        batch.draw(currentTexture, locationX, locationY, width, height,0,0,currentTexture.getWidth(),currentTexture.getHeight(),facingLeft,false);
         setBounds(locationX, locationY, width, height);
 
     }
@@ -342,9 +344,12 @@ public class Character extends Actor {
 
         if(moving.equals("RIGHT")) {
             locationX += speed;
+            facingLeft = false;
         }
         else if(moving.equals("LEFT")) {
             locationX -= speed;
+            facingLeft = true;
+
         }
     }
 
@@ -388,4 +393,6 @@ public class Character extends Actor {
 
         }
     }
+
+
 }
