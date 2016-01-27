@@ -18,7 +18,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import org.thedoorgame.doorgame.DoorGame;
 import org.thedoorgame.doorgame.Objects.*;
 import org.thedoorgame.doorgame.Objects.Character;
-import org.thedoorgame.doorgame.Question;
+import org.thedoorgame.doorgame.Score;
 import org.thedoorgame.doorgame.random.DoorChooser;
 
 import java.util.ArrayList;
@@ -44,6 +44,7 @@ public class GameScreen implements Screen {
 
 
     private int width, height;
+    private Score score;
 
     private ArrayList<Character> characters = new ArrayList<Character>();
 
@@ -110,6 +111,7 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor1.getDoor(0).play();
+                score.addScore(10);
             }
         });
 
@@ -225,11 +227,13 @@ public class GameScreen implements Screen {
         doorChooser.randomDoorChooser();
 
 
-
+        score = new Score();
 
         // TODO figure out how to ask question after all characters hide
 
         stage.addActor(askQuestion(bobby));
+        stage.addActor(score);
+
 
 
         floor1.getFloor().setWidth(Gdx.graphics.getWidth());
@@ -246,7 +250,7 @@ public class GameScreen implements Screen {
     public Label askQuestion(Character character) {
         atlas = new TextureAtlas("ui/button.pack");
         skin = new Skin(atlas);
-        skin = new Skin(Gdx.files.internal("ui/menuSkin.json"), atlas);
+        skin = new Skin(Gdx.files.internal("ui/menuSkin.json"),atlas);
         textQuestion = new Label("Where is (SOMEONE)" + "?", skin);
         textQuestion.setFontScale(1);
 
@@ -265,6 +269,10 @@ public class GameScreen implements Screen {
 
 
         drawGrid(); // ADDED by LEIBNIZ
+
+        
+        score.addScore(1);
+
         stage.act(delta);
         stage.draw();
 
