@@ -23,6 +23,7 @@ public class FloorCreator {
 
 
     private Door doorOpened = null;
+    private Boolean canClick = false;
 
 /* ****************************
         Constructor (stage)
@@ -54,9 +55,11 @@ public class FloorCreator {
             doors[i].addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    doors[finalI].play();
-                    //score.addScore(10);
-                    doorOpened = doors[finalI];
+                    if (canClick) {
+                        doors[finalI].play();
+                        //score.addScore(10);
+                        doorOpened = doors[finalI];
+                    }
                 }
             });
 
@@ -76,6 +79,13 @@ public class FloorCreator {
     }
     public Door getDoorOpened() {
         return doorOpened;
+    }
+
+    public void setCanClick(Boolean canClick) {
+        this.canClick = canClick;
+    }
+    public boolean getCanClick() {
+        return canClick;
     }
 
 

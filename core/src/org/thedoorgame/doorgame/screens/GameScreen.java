@@ -278,6 +278,9 @@ public class GameScreen implements Screen {
         if(bobby.getIsInside() && mike.getIsInside() && lala.getIsInside() ) {
             question.setCharacter(doorChooser.getChosenCharacter());
 
+            floor1.setCanClick(true);
+            floor2.setCanClick(true);
+
         } else {
             question.setText("Waiting...");
         }
@@ -286,14 +289,23 @@ public class GameScreen implements Screen {
         // TODO fix so that a new game starts after adding score
         if(( floor1.getDoorOpened()==doorChooser.getChosenCharacter().getDoor())
                 || (floor2.getDoorOpened()==doorChooser.getChosenCharacter().getDoor()) ) {
+
             score.addScore(50);
+
             doorChooser.getChosenCharacter().setVisible(true);
+            doorChooser.getChosenCharacter().setIsInside(false);
+            doorChooser.getChosenCharacter().goToDestinationNow(false);
+
             floor1.setDoorOpened(null);
             floor2.setDoorOpened(null);
+
+            floor1.setCanClick(false);
+            floor2.setCanClick(false);
+
         } else if(floor1.getDoorOpened()!=null) {
             // do something when answer is wrong
         }
-        
+
 
 
         stage.act(delta);
