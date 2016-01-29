@@ -43,8 +43,9 @@ public class GameScreen implements Screen {
     private int width, height;
     private Score score;
 
+    //boolean gameOver =false;
 
-    Door doorOpened;
+    Door doorOpened = null;
     FloorCreator floorOpened;
 
     private Question question;
@@ -288,11 +289,13 @@ public class GameScreen implements Screen {
         if(doorOpened == doorChooser.getChosenCharacter().getDoor()) {
             score.addScore(50);
             doorChooser.getChosenCharacter().setVisible(true);
-        } else {
-            //do something
+            doorOpened = null;
+        } else if(doorOpened!=null) {
+            // do something when answer is wrong
         }
 
         //score.addScore(1);
+
 
         stage.act(delta);
         stage.draw();
