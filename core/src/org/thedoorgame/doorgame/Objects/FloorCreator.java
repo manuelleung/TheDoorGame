@@ -2,7 +2,9 @@ package org.thedoorgame.doorgame.Objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import javax.xml.transform.dom.DOMResult;
 
@@ -20,6 +22,7 @@ public class FloorCreator {
     private Stage stage;
 
 
+    private Door doorOpened = null;
 
 /* ****************************
         Constructor (stage)
@@ -46,13 +49,34 @@ public class FloorCreator {
             /////////////////////////
             doors[i].setFloorNumber(floorNumber);
             doors[i].setDoorNumber(i);
+
+            final int finalI = i;
+            doors[i].addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    doors[finalI].play();
+                    //score.addScore(10);
+                    doorOpened = doors[finalI];
+                }
+            });
+
             /////////////////////////
+
+
+
             distance += DISTANCE_BETWEEN_DOORS;
             stage.addActor(doors[i]);
         }
     }
 
 
+    public void setDoorOpened(Door doorOpened) {
+        //  null
+        this.doorOpened = doorOpened;
+    }
+    public Door getDoorOpened() {
+        return doorOpened;
+    }
 
 
 /* ***********************************************

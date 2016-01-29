@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -43,9 +44,11 @@ public class GameScreen implements Screen {
     private int width, height;
     private Score score;
 
+    private FloorCreator floor1;
+    private FloorCreator floor2;
     //boolean gameOver =false;
 
-    Door doorOpened = null;
+    //Door doorOpened = null;
     FloorCreator floorOpened;
 
     private Question question;
@@ -85,8 +88,8 @@ public class GameScreen implements Screen {
         //-------------- EXAMPLE: how to create floors-------------//
                                                                    //
         // Initialize two floors:
-        final FloorCreator floor1 = new FloorCreator(stage);       //
-        final FloorCreator floor2 = new FloorCreator(stage);       //
+        floor1 = new FloorCreator(stage);       //
+        floor2 = new FloorCreator(stage);       //
                                                                    //
         // Create floors                                           //        WARNING:
         floor1.createFloor(0);                                      //  You must call the createFloor()
@@ -100,112 +103,106 @@ public class GameScreen implements Screen {
         //----------------- Done ----------------------------------//
 
 
-
-        //---- EXAMPLE: how to access a door from a Floor----------//
-                                                                   //
-        Door firstDoor = floor1.getDoor(0);                         //   the first door of any floor
-        Door secondDoor = floor1.getDoor(1);                       //    is alway zero
-                                                                   //
-        //--etc----------------------------------------------------//
-
-
-
 /* *****************************
         1st FLOOR
  * ****************************/
-        floor1.getDoor(0).addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                floor1.getDoor(0).play();
-                //score.addScore(10);
-                doorOpened = floor1.getDoor(0);
-            }
-        });
+        /*
+            floor1.getDoor(0).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    floor1.getDoor(0).play();
+                    //score.addScore(10);
+                    doorOpened = floor1.getDoor(0);
+                }
+            });
 
-        floor1.getDoor(1).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                floor1.getDoor(1).play();
+            floor1.getDoor(1).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    floor1.getDoor(1).play();
 
-                doorOpened = floor1.getDoor(1);
-            }
-        });
+                    doorOpened = floor1.getDoor(1);
+                }
+            });
 
-        floor1.getDoor(2).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                floor1.getDoor(2).play();
-                doorOpened = floor1.getDoor(2);
-            }
-        });
+            floor1.getDoor(2).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    floor1.getDoor(2).play();
+                    doorOpened = floor1.getDoor(2);
+                }
+            });
 
-        floor1.getDoor(3).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                floor1.getDoor(3).play();
+            floor1.getDoor(3).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    floor1.getDoor(3).play();
 
-                doorOpened = floor1.getDoor(3);
+                    doorOpened = floor1.getDoor(3);
 
-            }
-        });
+                }
+            });
 
-        floor1.getDoor(4).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                floor1.getDoor(4).play();
+            floor1.getDoor(4).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    floor1.getDoor(4).play();
 
-                doorOpened = floor1.getDoor(4);
-            }
-        });
-
+                    doorOpened = floor1.getDoor(4);
+                }
+            });
+*/
 /* *****************************
         2nd FLOOR
  * ****************************/
-        floor2.getDoor(0).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                floor2.getDoor(0).play();
+        /*
+            floor2.getDoor(0).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    floor2.getDoor(0).play();
 
-                doorOpened = floor2.getDoor(0);
-            }
-        });
+                    doorOpened = floor2.getDoor(0);
+                }
+            });
 
-        floor2.getDoor(1).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                floor2.getDoor(1).play();
+            floor2.getDoor(1).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    floor2.getDoor(1).play();
 
-                doorOpened = floor2.getDoor(1);
+                    doorOpened = floor2.getDoor(1);
 
-            }
-        });
+                }
+            });
 
-        floor2.getDoor(2).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                floor2.getDoor(2).play();
+            floor2.getDoor(2).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    floor2.getDoor(2).play();
 
-                doorOpened = floor2.getDoor(2);
-            }
-        });
+                    doorOpened = floor2.getDoor(2);
+                }
+            });
 
-        floor2.getDoor(3).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                floor2.getDoor(3).play();
+            floor2.getDoor(3).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    floor2.getDoor(3).play();
 
-                doorOpened = floor2.getDoor(3);
-            }
-        });
+                    doorOpened = floor2.getDoor(3);
+                }
+            });
 
-        floor2.getDoor(4).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                floor2.getDoor(4).play();
+            floor2.getDoor(4).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    floor2.getDoor(4).play();
 
-                doorOpened = floor2.getDoor(4);
-            }
-        });
+                    doorOpened = floor2.getDoor(4);
+                }
+            });
+        */
+
 
 
         characters.add(bobby);
@@ -280,21 +277,23 @@ public class GameScreen implements Screen {
         // TODO do this in a loop that checks each character also character name to picture
         if(bobby.getIsInside() && mike.getIsInside() && lala.getIsInside() ) {
             question.setCharacter(doorChooser.getChosenCharacter());
+
         } else {
             question.setText("Waiting...");
         }
         ////////////////////////////////////////////////////////////////
 
         // TODO fix so that a new game starts after adding score
-        if(doorOpened == doorChooser.getChosenCharacter().getDoor()) {
+        if(( floor1.getDoorOpened()==doorChooser.getChosenCharacter().getDoor())
+                || (floor2.getDoorOpened()==doorChooser.getChosenCharacter().getDoor()) ) {
             score.addScore(50);
             doorChooser.getChosenCharacter().setVisible(true);
-            doorOpened = null;
-        } else if(doorOpened!=null) {
+            floor1.setDoorOpened(null);
+            floor2.setDoorOpened(null);
+        } else if(floor1.getDoorOpened()!=null) {
             // do something when answer is wrong
         }
-
-        //score.addScore(1);
+        
 
 
         stage.act(delta);
