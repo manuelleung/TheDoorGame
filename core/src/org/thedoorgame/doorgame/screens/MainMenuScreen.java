@@ -121,6 +121,7 @@ public class MainMenuScreen implements Screen {
         buttonExit.pad(15);
 
 
+        // TODO make this better ? this code looks like poop
         table.add(heading);
         table.getCell(heading).spaceBottom(100); // margin between buttons / text
         table.row(); //add a new row after heading
@@ -136,13 +137,6 @@ public class MainMenuScreen implements Screen {
         table.add(buttonExit);
         table.debug();
         stage.addActor(table);
-
-
-
-
-
-
-
 
 
     }

@@ -2,11 +2,8 @@ package org.thedoorgame.doorgame.random;
 
 import org.thedoorgame.doorgame.Objects.*;
 import org.thedoorgame.doorgame.Objects.Character;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -49,7 +46,6 @@ public class DoorChooser {
 
     /* Register characters */
     public void addCharacters(ArrayList<Character> characters) {
-        //characters.add(character);
         this.characters= new ArrayList<Character>(characters);
     }
 
@@ -66,21 +62,16 @@ public class DoorChooser {
         return chosenCharacter;
     }
 
-    Door theDoor;
     /* Random chooser for characters to doors */
     public void randomDoorChooser() {
         Character theChar;
-        //Door theDoor;
+        Door theDoor;
         while (charactersAvailable) {
             theChar = characters.remove(0);
 
             randomIndex = rand.nextInt(doors.size());
 
             theDoor = doors.remove(randomIndex);
-
-            // TODO
-            //theChar.setDoorNumber(theDoor.getDoorNumber());
-            //theChar.setFloorNumber(theDoor.getFloorNumber());
 
             theChar.setFloorDestination(floors.get(theDoor.getFloorNumber()).getFloor());
             theChar.setDoorDestination(floors.get(theDoor.getFloorNumber()).getDoor(theDoor.getDoorNumber()));
@@ -94,22 +85,15 @@ public class DoorChooser {
 
     }
 
-    public void print() {
-        System.out.println("Door#: " + theDoor.getDoorNumber());
-        System.out.println("Floor#: " + theDoor.getFloorNumber());
-    }
-
+    /* return character to be questioned */
     public Character getChosenCharacter() {
         return chosenCharacter;
     }
 
-    public ArrayList<Character> getCharacters() {
-        return characters;
-    }
-
-    /**
+    /** NOT IN USE
      * goToDestination
      */
+    /*
     public void goToDestination(Character character) {
 
         //for (int i=0; i<characters.size(); i++) {
@@ -145,5 +129,6 @@ public class DoorChooser {
 
         //}
     }
+    */
 
 }

@@ -164,14 +164,6 @@ public class Character extends Actor {
     }
 
 
-
-
-
-
-
-
-
-
     /* **********************
             Setters
      * *********************/
@@ -423,11 +415,10 @@ public class Character extends Actor {
             } else if (this.getLocationX() < door.getLocationX() - 10) {
                 this.moveRight();
             } else {
-                //System.out.println("HEREeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 this.stop(); // stop the character from moving.
                 door.play();      // Open the door
                 this.setVisible(false); // make the character disappear inside the door
-                isInside = true;
+                isInside = true; // character is inside flag
             }
 
         }

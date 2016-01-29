@@ -7,14 +7,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-
 import org.thedoorgame.doorgame.DoorGame;
 import org.thedoorgame.doorgame.Objects.*;
 import org.thedoorgame.doorgame.Objects.Character;
@@ -46,15 +41,12 @@ public class GameScreen implements Screen {
 
     private FloorCreator floor1;
     private FloorCreator floor2;
-    //boolean gameOver =false;
-
-    //Door doorOpened = null;
-    FloorCreator floorOpened;
 
     private Question question;
 
     private ArrayList<Character> characters = new ArrayList<Character>();
 
+    // TODO create them dynamically
     private final Character bobby  = new Character(Character.BOBBY);
     private final Character mike  = new Character(Character.MIKE);
     private final Character lala  = new Character(Character.LALA);
@@ -85,133 +77,27 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
 
-        //-------------- EXAMPLE: how to create floors-------------//
-                                                                   //
         // Initialize two floors:
-        floor1 = new FloorCreator(stage);       //
-        floor2 = new FloorCreator(stage);       //
-                                                                   //
+        floor1 = new FloorCreator(stage);
+        floor2 = new FloorCreator(stage);
+
         // Create floors                                           //        WARNING:
         floor1.createFloor(0);                                      //  You must call the createFloor()
         floor2.createFloor(1);                                      //  method first, before you
                                                                    //  relocate them.
-                                                                   //
-        // relocate them anywhere you want                         //
-        floor1.setLocation(0,0);                                   //
-        floor2.setLocation(0,350);                                 //
-                                                                   //
-        //----------------- Done ----------------------------------//
+
+        // relocate them anywhere you want
+        floor1.setLocation(0,0);
+        floor2.setLocation(0,350);
 
 
-/* *****************************
-        1st FLOOR
- * ****************************/
-        /*
-            floor1.getDoor(0).addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    floor1.getDoor(0).play();
-                    //score.addScore(10);
-                    doorOpened = floor1.getDoor(0);
-                }
-            });
-
-            floor1.getDoor(1).addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    floor1.getDoor(1).play();
-
-                    doorOpened = floor1.getDoor(1);
-                }
-            });
-
-            floor1.getDoor(2).addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    floor1.getDoor(2).play();
-                    doorOpened = floor1.getDoor(2);
-                }
-            });
-
-            floor1.getDoor(3).addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    floor1.getDoor(3).play();
-
-                    doorOpened = floor1.getDoor(3);
-
-                }
-            });
-
-            floor1.getDoor(4).addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    floor1.getDoor(4).play();
-
-                    doorOpened = floor1.getDoor(4);
-                }
-            });
-*/
-/* *****************************
-        2nd FLOOR
- * ****************************/
-        /*
-            floor2.getDoor(0).addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    floor2.getDoor(0).play();
-
-                    doorOpened = floor2.getDoor(0);
-                }
-            });
-
-            floor2.getDoor(1).addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    floor2.getDoor(1).play();
-
-                    doorOpened = floor2.getDoor(1);
-
-                }
-            });
-
-            floor2.getDoor(2).addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    floor2.getDoor(2).play();
-
-                    doorOpened = floor2.getDoor(2);
-                }
-            });
-
-            floor2.getDoor(3).addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    floor2.getDoor(3).play();
-
-                    doorOpened = floor2.getDoor(3);
-                }
-            });
-
-            floor2.getDoor(4).addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    floor2.getDoor(4).play();
-
-                    doorOpened = floor2.getDoor(4);
-                }
-            });
-        */
-
-
-
+        // TODO make this a loop
         characters.add(bobby);
         characters.add(mike);
         characters.add(lala);
 
 
-
-
+        // TODO move this to a method
         for(int i=0; i<characters.size(); i++) {
             characters.get(i).resize(100, 110);
             characters.get(i).setLocationY(floor1.getFloor().getLocationY() + floor1.getFloor().getHeight());
@@ -228,6 +114,7 @@ public class GameScreen implements Screen {
 
 
 
+        // TODO make this simpler less method calls
         // Test chooser ... Dont mind all the calls.
         // kept them separate for testing
         doorChooser = new DoorChooser();
@@ -246,20 +133,14 @@ public class GameScreen implements Screen {
         // SCORE LABEL
         score = new Score(skin);
 
+        // Add labels to stage
         stage.addActor(question);
         stage.addActor(score);
 
-
-
+        // TODO move this to the floor initialization ? IDK
         floor1.getFloor().setWidth(Gdx.graphics.getWidth());
         floor2.getFloor().setWidth(Gdx.graphics.getWidth());
 
-
-
-
-
-
-        //--------------------------------------------------------------//
     }
 
     @Override
@@ -276,6 +157,7 @@ public class GameScreen implements Screen {
 
         // TODO do this in a loop that checks each character also character name to picture
         if(bobby.getIsInside() && mike.getIsInside() && lala.getIsInside() ) {
+
             question.setCharacter(doorChooser.getChosenCharacter());
 
             floor1.setCanClick(true);
@@ -284,7 +166,6 @@ public class GameScreen implements Screen {
         } else {
             question.setText("Waiting...");
         }
-        ////////////////////////////////////////////////////////////////
 
         // TODO fix so that a new game starts after adding score
         if(( floor1.getDoorOpened()==doorChooser.getChosenCharacter().getDoor())
@@ -303,12 +184,12 @@ public class GameScreen implements Screen {
             floor2.setCanClick(false);
 
         } else if(floor1.getDoorOpened()!=null) {
-            // do something when answer is wrong
+            // TODO do something when the answer is wrong (show gameover score retry exit) popup
         }
 
 
-
         stage.act(delta);
+
         stage.draw();
 
 
@@ -321,22 +202,15 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height) {
-    }
-
+    public void resize(int width, int height) {}
     @Override
-    public void pause() {
-    }
-
+    public void pause() {}
     @Override
-    public void resume() {
-    }
-
+    public void resume() {}
     @Override
     public void hide() {
         dispose();
     }
-
     @Override
     public void dispose() {
         stage.dispose();
@@ -344,8 +218,6 @@ public class GameScreen implements Screen {
         atlas.dispose();
         skin.dispose();
     }
-
-
 
 //----- METHOD ADDED BY LEIBNIZ --------------------------------------------------//
     private void drawGrid() {                                                     //
