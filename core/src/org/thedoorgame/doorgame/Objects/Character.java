@@ -94,6 +94,8 @@ public class Character extends Actor {
 
     private boolean isInside = false;
 
+    private String characterName = "";
+
 /* **********************************
         DEFAULT  CONSTRUCTOR
  * *********************************/
@@ -289,7 +291,12 @@ public class Character extends Actor {
 
 
 
-
+    public void setCharacterName(String characterName) {
+        this.characterName = characterName;
+    }
+    public String getCharacterName() {
+        return characterName;
+    }
 
 
 
@@ -300,14 +307,17 @@ public class Character extends Actor {
         switch (player) {
             case BOBBY:
                 textureArray = BOBBY_TEXTURE;
+                characterName = "Bobby";
                 setCurrentTexture(BOBBY_TEXTURE[0]);
                 break;
             case MIKE:
                 textureArray = MIKE_TEXTURE;
+                characterName = "Mike";
                 setCurrentTexture(MIKE_TEXTURE[0]);
                 break;
             case LALA:
                 textureArray = LALA_TEXTURE;
+                characterName = "Lala";
                 setCurrentTexture(LALA_TEXTURE[0]);
                 break;
 

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -16,10 +15,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import org.thedoorgame.doorgame.DoorGame;
-import org.thedoorgame.doorgame.GameSound;
 import org.thedoorgame.doorgame.Objects.*;
 import org.thedoorgame.doorgame.Objects.Character;
-import org.thedoorgame.doorgame.Score;
+import org.thedoorgame.doorgame.labels.Question;
+import org.thedoorgame.doorgame.labels.Score;
 import org.thedoorgame.doorgame.random.DoorChooser;
 
 import java.util.ArrayList;
@@ -31,12 +30,10 @@ public class GameScreen implements Screen {
     final DoorGame doorGame;
     Stage stage;
 
+    // Skin and Atlas
+    private static final TextureAtlas atlas = new TextureAtlas("ui/button.pack");
+    private static final Skin skin = new Skin(Gdx.files.internal("ui/menuSkin.json"),atlas);
 
-    ////////////////// question/font skin
-    Label textQuestion;
-    Skin skin;
-    TextureAtlas atlas;
-    /////////////
 
     OrthographicCamera camera;
 
@@ -45,6 +42,12 @@ public class GameScreen implements Screen {
 
     private int width, height;
     private Score score;
+
+
+    Door doorOpened;
+    FloorCreator floorOpened;
+
+    private Question question;
 
     private ArrayList<Character> characters = new ArrayList<Character>();
 
@@ -113,7 +116,8 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor1.getDoor(0).play();
-                score.addScore(10);
+                //score.addScore(10);
+                doorOpened = floor1.getDoor(0);
             }
         });
 
@@ -121,6 +125,8 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor1.getDoor(1).play();
+
+                doorOpened = floor1.getDoor(1);
             }
         });
 
@@ -128,6 +134,7 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor1.getDoor(2).play();
+                doorOpened = floor1.getDoor(2);
             }
         });
 
@@ -136,6 +143,8 @@ public class GameScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 floor1.getDoor(3).play();
 
+                doorOpened = floor1.getDoor(3);
+
             }
         });
 
@@ -143,6 +152,8 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor1.getDoor(4).play();
+
+                doorOpened = floor1.getDoor(4);
             }
         });
 
@@ -153,6 +164,8 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(0).play();
+
+                doorOpened = floor2.getDoor(0);
             }
         });
 
@@ -160,7 +173,9 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(1).play();
-                //bobby.moveLeft();
+
+                doorOpened = floor2.getDoor(1);
+
             }
         });
 
@@ -168,7 +183,8 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(2).play();
-                //bobby.moveRight();
+
+                doorOpened = floor2.getDoor(2);
             }
         });
 
@@ -176,6 +192,8 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(3).play();
+
+                doorOpened = floor2.getDoor(3);
             }
         });
 
@@ -184,29 +202,14 @@ public class GameScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 floor2.getDoor(4).play();
 
+                doorOpened = floor2.getDoor(4);
             }
         });
-
-        //bobby.resize(100, 110);
-        //bobby.setLocationY(floor1.getFloor().getLocationY() + floor1.getFloor().getHeight());
-        //bobby.moveRight();
-        //bobby.play();
 
 
         characters.add(bobby);
         characters.add(mike);
         characters.add(lala);
-
-
-        //testing multiple characters
-//        characters.add(bobby);
-//        characters.add(bobby2);
-//        characters.add(bobby3);
-//        characters.add(bobby4);
-//        characters.add(mike);
-        ////////////////////////////
-
-
 
 
 
@@ -224,6 +227,9 @@ public class GameScreen implements Screen {
             stage.addActor(characters.get(i));
         }
 
+
+
+
         // Test chooser ... Dont mind all the calls.
         // kept them separate for testing
         doorChooser = new DoorChooser();
@@ -236,11 +242,13 @@ public class GameScreen implements Screen {
         doorChooser.randomDoorChooser();
 
 
-        score = new Score();
+        // QUESTION LABEL
+        question = new Question(skin);
 
-        // TODO figure out how to ask question after all characters hide
+        // SCORE LABEL
+        score = new Score(skin);
 
-        stage.addActor(askQuestion(bobby));
+        stage.addActor(question);
         stage.addActor(score);
 
 
@@ -256,17 +264,6 @@ public class GameScreen implements Screen {
         //--------------------------------------------------------------//
     }
 
-    public Label askQuestion(Character character) {
-        atlas = new TextureAtlas("ui/button.pack");
-        skin = new Skin(atlas);
-        skin = new Skin(Gdx.files.internal("ui/menuSkin.json"),atlas);
-        textQuestion = new Label("Where is (SOMEONE)" + "?", skin);
-        textQuestion.setFontScale(1);
-
-        return textQuestion;
-    }
-
-
     @Override
     public void render(float delta) {
         // clear the screen with a dark blue color. The
@@ -279,8 +276,23 @@ public class GameScreen implements Screen {
 
         drawGrid(); // ADDED by LEIBNIZ
 
+        // TODO do this in a loop that checks each character also character name to picture
+        if(bobby.getIsInside() && mike.getIsInside() && lala.getIsInside() ) {
+            question.setCharacter(doorChooser.getChosenCharacter());
+        } else {
+            question.setText("Waiting...");
+        }
+        ////////////////////////////////////////////////////////////////
 
-        score.addScore(1);
+        // TODO fix so that a new game starts after adding score
+        if(doorOpened == doorChooser.getChosenCharacter().getDoor()) {
+            score.addScore(50);
+            doorChooser.getChosenCharacter().setVisible(true);
+        } else {
+            //do something
+        }
+
+        //score.addScore(1);
 
         stage.act(delta);
         stage.draw();
@@ -315,6 +327,8 @@ public class GameScreen implements Screen {
     public void dispose() {
         stage.dispose();
         shapeRenderer.dispose();
+        atlas.dispose();
+        skin.dispose();
     }
 
 

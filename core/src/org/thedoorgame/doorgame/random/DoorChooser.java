@@ -30,7 +30,6 @@ public class DoorChooser {
     public DoorChooser() {
         floors = new ArrayList<FloorCreator>();
         doors = new ArrayList<Door>();
-        characters = new ArrayList<Character>();
         rand = new Random();
     }
 
@@ -51,7 +50,7 @@ public class DoorChooser {
     /* Register characters */
     public void addCharacters(ArrayList<Character> characters) {
         //characters.add(character);
-        this.characters=characters;
+        this.characters= new ArrayList<Character>(characters);
     }
 
     /* Shuffle the lists for more randomization */
@@ -100,6 +99,13 @@ public class DoorChooser {
         System.out.println("Floor#: " + theDoor.getFloorNumber());
     }
 
+    public Character getChosenCharacter() {
+        return chosenCharacter;
+    }
+
+    public ArrayList<Character> getCharacters() {
+        return characters;
+    }
 
     /**
      * goToDestination

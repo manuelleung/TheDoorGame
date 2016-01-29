@@ -1,4 +1,4 @@
-package org.thedoorgame.doorgame;
+package org.thedoorgame.doorgame.labels;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -11,14 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  * Created by leibnix on 1/27/2016.
  */
 public class Score extends Label {
-    // Skin and Atlas
-    private static final TextureAtlas atlas = new TextureAtlas("ui/button.pack");
-    private static final Skin skin = new Skin(Gdx.files.internal("ui/menuSkin.json"),atlas);
 
     // int: score = 0 by default
     private int score = 0;
 
-    public Score() {
+    public Score(Skin skin) {
         super("SCORE: 0" , skin); // Gives something to the superclass for now
         this.setText("SCORE: " + score); // The text that will be displayed on the screen
 
