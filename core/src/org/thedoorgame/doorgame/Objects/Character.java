@@ -89,6 +89,7 @@ public class Character extends Actor {
     private Floor floor;                                     //
     private boolean goToDestination = false;                 //
     private boolean facingLeft = false;                      //
+    private boolean randomFloorsEnabled = true;             //
 //-----------------------------------------------------------//
 
 
@@ -148,17 +149,18 @@ public class Character extends Actor {
         if (timer <= 0) {
             timer = ANIMATION_TIME;
             if (animationEnabled) {
-                checkForOutOfBounce();
                 playAnimation();
+                checkForOutOfBounce();
             }
         }
+
 
         if(goToDestination && !isInside) {
             goToDestination();
         }
 
 
-        batch.draw(currentTexture, locationX, locationY, width, height,0,0,currentTexture.getWidth(),currentTexture.getHeight(),facingLeft,false);
+        batch.draw(currentTexture, locationX, locationY, width, height, 0, 0, currentTexture.getWidth(), currentTexture.getHeight(), facingLeft, false);
         setBounds(locationX, locationY, width, height);
 
     }
@@ -221,6 +223,10 @@ public class Character extends Actor {
         this.goToDestination = goToDestination;
     }
 
+    public void setRandomFloorsEnabled(boolean randomFloorsEnabled) {
+        this.randomFloorsEnabled = randomFloorsEnabled;
+    }
+
 
     public void setIsInside(boolean isInside) {
         this.isInside = isInside;
@@ -281,6 +287,10 @@ public class Character extends Actor {
         return this.getFloor();
     }
 
+    public boolean getRandomFloorEnabled() {
+        return this.randomFloorsEnabled;
+    }
+
 
 
     public void setCharacterName(String characterName) {
@@ -331,18 +341,39 @@ public class Character extends Actor {
     }
 
     private void checkForOutOfBounce() {
+        // If the character go out of bounce on the RIGHT side
         if(locationX >= Gdx.graphics.getWidth()) {
             locationX = Gdx.graphics.getWidth();
-            moveLeft();
-            if(floorsGiven) {
-                locationY = locationsOfFloors.get(MathUtils.random(locationsOfFloors.size()-1)) + floorHeight;
+
+
+
+
+            // In order to appear in a random floor
+            if(floorsGiven && randomFloorsEnabled) {
+                goToRandomFloor();
+                moveLeft();
+            }
+
+            // in order to appear in the next floor available
+            else if(floorsGiven && !randomFloorsEnabled) {
+               goToNextFloor();
+                moveLeft();
             }
         }
         else if(locationX < (0-this.width)) {
             locationX = 0 - this.width;
-            moveRight();
-            if(floorsGiven){
-                locationY = locationsOfFloors.get(MathUtils.random(locationsOfFloors.size()-1)) + floorHeight;
+
+
+            // In order to appear in a random floor
+            if(floorsGiven && randomFloorsEnabled) {
+                goToRandomFloor();
+                moveRight();
+            }
+
+            // in order to appear in the next floor available
+            else if(floorsGiven && !randomFloorsEnabled) {
+                goToNextFloor();
+                moveRight();
             }
         }
     }
@@ -423,6 +454,26 @@ public class Character extends Actor {
 
         }
     }
+
+    private void goToRandomFloor() {
+        locationY = locationsOfFloors.get(MathUtils.random(locationsOfFloors.size()-1)) + floorHeight;
+    }
+
+    private void goToNextFloor() {
+        System.out.println("Location boolean: " + (locationY == locationsOfFloors.get(0) + floorHeight));
+
+        if((locationY == (locationsOfFloors.get(0) + floorHeight))) {
+            locationY = locationsOfFloors.get(1) + floorHeight;
+            System.out.println("LocationY: " + locationY);
+        }
+
+        else  if((locationY == (locationsOfFloors.get(1) + floorHeight))) {
+                locationY = locationsOfFloors.get(0) + floorHeight;
+                System.out.println("LocationY: " + locationY);
+        }
+    }
+
+
 
 
 }

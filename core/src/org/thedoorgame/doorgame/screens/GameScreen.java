@@ -107,6 +107,7 @@ public class GameScreen implements Screen {
             characters.get(i).play();
             characters.get(i).setFloors(floor1, floor2);
 
+            characters.get(i).setRandomFloorsEnabled(false);
             characters.get(i).goToDestinationNow(true);
             stage.addActor(characters.get(i));
         }
